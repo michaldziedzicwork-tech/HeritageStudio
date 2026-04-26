@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LodWorks — Web Design & Development Studio</title>
+<meta name="description" content="LodWorks — studio tworzenia stron internetowych. Strony, sklepy, produkty cyfrowe.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F8F6F1;
+    --ink: #1A1916;
+    --ink2: #6B6860;
+    --ink3: #B0ADA6;
+    --accent: #C8472A;
+    --white: #FFFFFF;
+    --border: #E2DED6;
+    --serif: 'DM Serif Display', serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  ::selection { background: var(--accent); color: var(--white); }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 48px;
+    background: var(--bg);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  nav.scrolled { border-color: var(--border); }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  .nav-logo span { color: var(--accent); }
+
+  .nav-right { display: flex; align-items: center; gap: 32px; }
+
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  .lang-toggle {
+    display: flex; gap: 2px;
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 0.06em;
+  }
+  .lang-btn {
+    padding: 4px 8px;
+    border: 1px solid var(--border);
+    background: none;
+    cursor: pointer;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--ink2);
+    transition: all 0.2s;
+  }
+  .lang-btn:first-child { border-radius: 4px 0 0 4px; }
+  .lang-btn:last-child { border-radius: 0 4px 4px 0; }
+  .lang-btn.active { background: var(--ink); color: var(--white); border-color: var(--ink); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 48px 72px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: 20px;
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(52px, 8vw, 120px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    max-width: 900px;
+    margin-bottom: 40px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  .hero-desc {
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--ink2);
+    max-width: 480px;
+    line-height: 1.7;
+  }
+
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 14px; font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 2px;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .hero-cta:hover { color: var(--accent); border-color: var(--accent); }
+  .hero-cta svg { transition: transform 0.2s; }
+  .hero-cta:hover svg { transform: translate(3px, -3px); }
+
+  .hero-line {
+    position: absolute;
+    top: 0; right: 160px;
+    width: 1px; height: 100%;
+    background: var(--border);
+  }
+
+  .hero-number {
+    position: absolute;
+    top: 50%; right: 48px;
+    transform: translateY(-50%);
+    font-family: var(--serif);
+    font-size: 180px;
+    color: var(--border);
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  /* SECTIONS */
+  section { padding: 120px 48px; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: 56px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .section-label::after {
+    content: '';
+    display: block;
+    width: 32px; height: 1px;
+    background: var(--ink3);
+  }
+
+  /* PROJECTS */
+  .projects { background: var(--white); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .project-card {
+    background: var(--white);
+    padding: 48px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: background 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card:hover { background: var(--bg); }
+
+  .project-card::after {
+    content: '↗';
+    position: absolute;
+    top: 40px; right: 48px;
+    font-size: 20px;
+    color: var(--ink3);
+    transition: color 0.2s, transform 0.2s;
+  }
+  .project-card:hover::after { color: var(--accent); transform: translate(3px, -3px); }
+
+  .project-num {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--ink3);
+  }
+
+  .project-name {
+    font-family: var(--serif);
+    font-size: 28px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+
+  .project-desc {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--ink2);
+    line-height: 1.6;
+    margin-top: auto;
+  }
+
+  .project-tags {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-top: 8px;
+  }
+  .tag {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+    border-radius: 2px;
+  }
+  .placeholder-inner { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; min-height: 220px; border: 1.5px dashed var(--border); border-radius: 4px; gap: 10px; }
+  .placeholder-inner p { font-size: 12px; font-weight: 400; letter-spacing: 0.06em; color: var(--ink3); text-align: center; line-height: 1.6; }
+  .placeholder-inner .plus { font-family: var(--serif); font-size: 32px; color: var(--border); }
+  
+  /* ABOUT */
+  .about { background: var(--white); }
+  .about-inner { display: grid; grid-template-columns: 5fr 4fr; gap: 80px; align-items: start; }
+  .about-title { font-family: var(--serif); font-size: clamp(40px, 4.5vw, 64px); line-height: 1.05; letter-spacing: -0.025em; margin-bottom: 32px; }
+  .about-title em { font-style: italic; color: var(--accent); }
+  .about-text { font-size: 16px; font-weight: 300; color: var(--ink2); line-height: 1.85; }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border); }
+  .stat-box { padding: 32px 28px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .stat-box:nth-child(even) { border-right: none; }
+  .stat-box:nth-last-child(-n+2) { border-bottom: none; }
+  .stat-num { font-family: var(--serif); font-size: 44px; letter-spacing: -0.02em; color: var(--ink); line-height: 1; }
+  .stat-label { font-size: 12px; font-weight: 300; color: var(--ink2); margin-top: 6px; }
+
+  /* STACK */
+  .stack { background: var(--bg); }
+
+  .stack-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .stack-item {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink);
+    border: 1px solid var(--border);
+    padding: 10px 20px;
+    border-radius: 2px;
+    transition: all 0.2s;
+    cursor: default;
+  }
+  .stack-item:hover {
+    background: var(--ink);
+    color: var(--white);
+    border-color: var(--ink);
+  }
+
+  /* CONTACT */
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .contact-title {
+    font-family: var(--serif);
+    font-size: clamp(36px, 4vw, 56px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .contact-title em { font-style: italic; color: var(--accent); }
+
+  .contact-email {
+    display: inline-block;
+    font-family: var(--serif);
+    font-size: 20px;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 2px;
+    margin-bottom: 40px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .contact-email:hover { color: var(--accent); border-color: var(--accent); }
+
+  form { display: flex; flex-direction: column; gap: 20px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .field { display: flex; flex-direction: column; gap: 8px; }
+
+  label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink3);
+  }
+
+  input, textarea {
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--ink);
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 14px 16px;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  input:focus, textarea:focus { border-color: var(--ink); }
+  textarea { resize: vertical; min-height: 120px; }
+
+  .submit-btn {
+    align-self: flex-start;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--ink);
+    border: none;
+    padding: 16px 36px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+  .submit-btn:hover { background: var(--accent); }
+
+  /* OFFER */
+  .offer { background: var(--ink); color: var(--white); }
+  .offer .section-label { color: rgba(255,255,255,0.3); }
+  .offer .section-label::after { background: rgba(255,255,255,0.3); }
+  .offer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.08); }
+  .offer-card { background: var(--ink); padding: 48px 40px; transition: background 0.25s; }
+  .offer-card:hover { background: #232119; }
+  .offer-icon { width: 40px; height: 40px; margin-bottom: 28px; border: 1px solid rgba(255,255,255,0.12); border-radius: 4px; display: flex; align-items: center; justify-content: center; }
+  .offer-icon svg { width: 18px; height: 18px; stroke: rgba(255,255,255,0.5); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .offer-num { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: rgba(255,255,255,0.25); margin-bottom: 16px; }
+  .offer-title { font-family: var(--serif); font-size: 26px; letter-spacing: -0.01em; color: var(--white); margin-bottom: 16px; line-height: 1.1; }
+  .offer-desc { font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.75; margin-bottom: 28px; }
+  .offer-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .offer-list li { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.4); display: flex; align-items: center; gap: 8px; }
+  .offer-list li::before { content: ''; display: block; width: 4px; height: 4px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+  /* TICKER */
+  .hero-ticker-wrap { overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 10px 0; margin-top: 50px; }
+  .hero-ticker { display: flex; gap: 48px; white-space: nowrap; animation: ticker 18s linear infinite; }
+  .hero-ticker span { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink3); flex-shrink: 0; }
+  .hero-ticker span.dot { color: var(--accent); font-size: 8px; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+
+  /* FOOTER */
+  footer {
+    padding: 32px 48px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .footer-logo span { color: var(--accent); }
+
+  .footer-copy {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--ink3);
+  }
+
+  /* ANIMATIONS */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 18px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 0 24px 56px; }
+    .hero-number { display: none; }
+    .hero-line { display: none; }
+    .offer-grid { grid-template-columns: 1fr; }
+    .hero-bottom { flex-direction: column; align-items: flex-start; }
+    section { padding: 80px 24px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .about-inner { grid-template-columns: 1fr; gap: 40px; }
+    .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#" class="nav-logo">Lod<span>Works</span></a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#projects" data-i18n="nav.projects">Projekty</a></li>
+      <li><a href="#about" data-i18n="nav.about">O nas</a></li>
+      <li><a href="#stack" data-i18n="nav.stack">Stack</a></li>
+      <li><a href="#contact" data-i18n="nav.contact">Kontakt</a></li>
+    </ul>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('pl')">PL</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-line"></div>
+  <div class="hero-number">W</div>
+  <p class="hero-eyebrow reveal" data-i18n="hero.eyebrow">Web Design & Development Studio</p>
+  <h1 class="hero-title reveal" style="transition-delay:0.1s">
+    <span data-i18n="hero.title1">Strony, które</span><br>
+    <em data-i18n="hero.title2">naprawdę działają.</em>
+  </h1>
+  <div class="hero-bottom reveal" style="transition-delay:0.2s">
+    <p class="hero-desc" data-i18n="hero.desc">
+      Tworzymy nowoczesne strony internetowe, sklepy e-commerce i produkty cyfrowe. Łączymy estetykę z funkcjonalnością.
+    </p>
+    <a href="#projects" class="hero-cta">
+      <span data-i18n="hero.cta">Zobacz projekty</span>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+  <div class="hero-right reveal" style="transition-delay:.2s">
+    <div class="hero-ticker-wrap">
+      <div class="hero-ticker">
+        <span data-i18n="tk.s1">Strony internetowe</span><span class="dot">◆</span>
+        <span data-i18n="tk.s2">Sklepy e-commerce</span><span class="dot">◆</span>
+        <span data-i18n="tk.s3">Produkty cyfrowe</span><span class="dot">◆</span>
+        <span data-i18n="tk.s4">WordPress</span><span class="dot">◆</span>
+        <span data-i18n="tk.s5">Webflow</span><span class="dot">◆</span>
+        <span data-i18n="tk.s6">React</span><span class="dot">◆</span>
+        <span data-i18n="tk.s1">Strony internetowe</span><span class="dot">◆</span>
+        <span data-i18n="tk.s2">Sklepy e-commerce</span><span class="dot">◆</span>
+        <span data-i18n="tk.s3">Produkty cyfrowe</span><span class="dot">◆</span>
+        <span data-i18n="tk.s4">WordPress</span><span class="dot">◆</span>
+        <span data-i18n="tk.s5">Webflow</span><span class="dot">◆</span>
+        <span data-i18n="tk.s6">React</span><span class="dot">◆</span>
+      </div>
+    </div>
+
+</section>
+
+
+
+<section class="projects" id="projects">
+  <p class="section-label reveal" data-i18n="projects.label">Wybrane projekty</p>
+  <div class="projects-grid">
+
+    <a href="https://lektoria.webflow.io" target="_blank" rel="noopener" class="project-card reveal">
+      <span class="project-num">01</span>
+      <h3 class="project-name">Lektoria</h3>
+      <p class="project-desc" data-i18n="p.lektoria">Platforma do korepetycji matematycznych — kompletna strona z polityką prywatności i regulaminem, zaprojektowana z myślą o uczniach i rodzicach.</p>
+      <div class="project-tags">
+        <span class="tag">Webflow</span>
+        <span class="tag">Education</span>
+      </div>
+    </a>
+
+    <a href="https://hexasphere.pl" target="_blank" rel="noopener" class="project-card reveal" style="transition-delay:0.05s">
+      <span class="project-num">02</span>
+      <h3 class="project-name">Hexasphere</h3>
+      <p class="project-desc" data-i18n="p.hexasphere">Strona firmowa z nowoczesnym designem — zaprojektowana z dbałością o identyfikację wizualną i doświadczenie użytkownika.</p>
+      <div class="project-tags">
+        <span class="tag">WordPress</span>
+        <span class="tag">Branding</span>
+      </div>
+    </a>
+
+    <a href="https://szkolyrzemiosl.edu.pl" target="_blank" rel="noopener" class="project-card reveal" style="transition-delay:0.1s">
+      <span class="project-num">03</span>
+      <h3 class="project-name">Szkoły Rzemiosł</h3>
+      <p class="project-desc" data-i18n="p.szkoly">Strona edukacyjna dla instytucji szkoleniowej — przejrzysta struktura, pełna informacji dla kandydatów i rodziców.</p>
+      <div class="project-tags">
+        <span class="tag">WordPress</span>
+        <span class="tag">Education</span>
+      </div>
+    </a>
+
+    <a href="https://jestespiekna.mocniwduchu.pl" target="_blank" rel="noopener" class="project-card reveal" style="transition-delay:0.15s">
+      <span class="project-num">04</span>
+      <h3 class="project-name">Jesteś Piękna</h3>
+      <p class="project-desc" data-i18n="p.piekna">Projekt z misją — strona łącząca estetykę z przekazem. Współpraca z marką lifestyle i well-being.</p>
+      <div class="project-tags">
+        <span class="tag">WordPress</span>
+        <span class="tag">Lifestyle</span>
+      </div>
+    </a>
+
+    <a href="https://truetoweb.com" target="_blank" rel="noopener" class="project-card reveal" style="transition-delay:0.2s">
+      <span class="project-num">05</span>
+      <h3 class="project-name">TrueToWeb</h3>
+      <p class="project-desc" data-i18n="p.truetoweb">Poprzednia marka studia — strona prezentująca usługi web designu i realizacje dla klientów z różnych branż.</p>
+      <div class="project-tags">
+        <span class="tag">WordPress</span>
+        <span class="tag">Agency</span>
+      </div>
+    </a>
+    <div class="project-card placeholder reveal" style="transition-delay:.30s">
+      <div class="placeholder-inner">
+        <span class="plus">+</span>
+        <p data-i18n="p.coming">Kolejny projekt<br>wkrótce</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stack" id="stack">
+  <p class="section-label reveal" data-i18n="stack.label">Technologie</p>
+  <div class="stack-grid reveal" style="transition-delay:0.1s">
+    <div class="stack-item">HTML</div>
+    <div class="stack-item">CSS</div>
+    <div class="stack-item">JavaScript</div>
+    <div class="stack-item">TypeScript</div>
+    <div class="stack-item">React</div>
+    <div class="stack-item">WordPress</div>
+    <div class="stack-item">WooCommerce</div>
+    <div class="stack-item">Webflow</div>
+    <div class="stack-item">Figma</div>
+    <div class="stack-item">Git</div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <p class="section-label reveal" data-i18n="sec.about">O nas</p>
+  <div class="about-inner">
+    <div>
+      <h2 class="about-title reveal"><span data-i18n="ab.t1">Dwóch braci</span><br><em data-i18n="ab.t2">z Łodzi.</em></h2>
+      <p class="about-text reveal" style="transition-delay:.1s" data-i18n="ab.text">Od ponad dwóch lat projektujemy i tworzymy strony internetowe — od kompletnych stron firmowych po współpracę ze specjalistami od brandingu i identyfikacji wizualnej. Tworzymy nowoczesne strony, które łączą estetykę z funkcjonalnością i są w pełni dopasowane do potrzeb klientów oraz ich biznesów. Działamy lokalnie i globalnie.</p>
+    </div>
+    <div class="reveal" style="transition-delay:.15s">
+      <div class="about-stats">
+        <div class="stat-box"><div class="stat-num">2+</div><div class="stat-label" data-i18n="ab.s1">lata doświadczenia</div></div>
+        <div class="stat-box"><div class="stat-num">5+</div><div class="stat-label" data-i18n="ab.s2">projektów</div></div>
+        <div class="stat-box"><div class="stat-num">3</div><div class="stat-label" data-i18n="ab.s3">platformy CMS</div></div>
+        <div class="stat-box"><div class="stat-num">∞</div><div class="stat-label" data-i18n="ab.s4">zaangażowanie</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="offer" id="offer">
+  <p class="section-label reveal" data-i18n="sec.offer">Oferta</p>
+  <div class="offer-grid">
+    <div class="offer-card reveal">
+      <div class="offer-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+      <div class="offer-num">01</div>
+      <h3 class="offer-title" data-i18n="o1.title">Strony internetowe</h3>
+      <p class="offer-desc" data-i18n="o1.desc">Projektuję i wdrażam strony firmowe, landing pages oraz strony wizytówki dopasowane do Twojej marki i celów biznesowych.</p>
+      <ul class="offer-list">
+        <li data-i18n="o1.l1">Projekt UI/UX</li>
+        <li data-i18n="o1.l2">WordPress / Webflow</li>
+        <li data-i18n="o1.l3">Responsywność</li>
+        <li data-i18n="o1.l4">Optymalizacja SEO</li>
+      </ul>
+    </div>
+    <div class="offer-card reveal" style="transition-delay:.08s">
+      <div class="offer-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 01-8 0"/></svg></div>
+      <div class="offer-num">02</div>
+      <h3 class="offer-title" data-i18n="o2.title">Sklepy e-commerce</h3>
+      <p class="offer-desc" data-i18n="o2.desc">Buduję sklepy internetowe gotowe do sprzedaży — z systemami płatności, zarządzaniem produktami i pełną integracją.</p>
+      <ul class="offer-list">
+        <li data-i18n="o2.l1">WooCommerce</li>
+        <li data-i18n="o2.l2">Konfiguracja płatności</li>
+        <li data-i18n="o2.l3">Zarządzanie produktami</li>
+        <li data-i18n="o2.l4">Sprzedaż globalna</li>
+      </ul>
+    </div>
+    <div class="offer-card reveal" style="transition-delay:.16s">
+      <div class="offer-icon"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+      <div class="offer-num">03</div>
+      <h3 class="offer-title" data-i18n="o3.title">Produkty cyfrowe</h3>
+      <p class="offer-desc" data-i18n="o3.desc">Tworzę szablony, narzędzia webowe i aplikacje — gotowe produkty cyfrowe, które można sprzedawać lub oferować klientom.</p>
+      <ul class="offer-list">
+        <li data-i18n="o3.l1">Szablony stron</li>
+        <li data-i18n="o3.l2">Narzędzia webowe</li>
+        <li data-i18n="o3.l3">React / JS apps</li>
+        <li data-i18n="o3.l4">Dokumentacja</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <p class="section-label reveal" data-i18n="contact.label">Kontakt</p>
+  <div class="contact-inner">
+    <div class="reveal">
+      <h2 class="contact-title">
+        <span data-i18n="contact.title1">Masz projekt?</span><br>
+        <em data-i18n="contact.title2">Porozmawiajmy.</em>
+      </h2>
+      <br><br>
+      <a href="mailto:michaldziedzic.work@gmail.com" class="contact-email">
+        michaldziedzic.work@gmail.com
+      </a>
+    </div>
+    <form class="reveal" style="transition-delay:0.1s" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="field">
+          <label data-i18n="form.name">Imię i nazwisko</label>
+          <input type="text" required placeholder="Jan Kowalski">
+        </div>
+        <div class="field">
+          <label data-i18n="form.email">Email</label>
+          <input type="email" required placeholder="jan@firma.pl">
+        </div>
+      </div>
+      <div class="field">
+        <label data-i18n="form.subject">Temat</label>
+        <input type="text" placeholder="Nowa strona dla mojej firmy">
+      </div>
+      <div class="field">
+        <label data-i18n="form.message">Wiadomość</label>
+        <textarea placeholder="Opisz swój projekt..."></textarea>
+      </div>
+      <button type="submit" class="submit-btn" data-i18n="form.send">Wyślij wiadomość</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <a href="#" class="footer-logo">Lod<span>Works</span></a>
+  <p class="footer-copy" data-i18n="footer.copy">© 2025 LodWorks. Wszelkie prawa zastrzeżone.</p>
+</footer>
+
+<script>
+const i18n = {
+  pl: {
+    'nav.projects': 'Projekty',
+    'nav.about': 'O nas',
+    'nav.stack': 'Stack',
+    'nav.contact': 'Kontakt',
+    'hero.eyebrow': 'Web Design & Development Studio',
+    'hero.title1': 'Strony, które',
+    'hero.title2': 'naprawdę działają.',
+    'hero.desc': 'Tworzymy nowoczesne strony internetowe, sklepy e-commerce i produkty cyfrowe. Łączymy estetykę z funkcjonalnością.',
+    'hero.cta': 'Zobacz projekty',
+    'projects.label': 'Wybrane projekty',
+    'p.lektoria': 'Platforma do korepetycji matematycznych — kompletna strona z polityką prywatności i regulaminem, zaprojektowana z myślą o uczniach i rodzicach.',
+    'p.hexasphere': 'Strona firmowa z nowoczesnym designem — zaprojektowana z dbałością o identyfikację wizualną i doświadczenie użytkownika.',
+    'p.szkoly': 'Strona edukacyjna dla instytucji szkoleniowej — przejrzysta struktura, pełna informacji dla kandydatów i rodziców.',
+    'p.piekna': 'Projekt z misją — strona łącząca estetykę z przekazem. Współpraca z marką lifestyle i well-being.',
+    'p.truetoweb': 'Poprzednia marka studia — strona prezentująca usługi web designu i realizacje dla klientów z różnych branż.',
+    'about.label': 'O nas',
+    'about.title1': 'Dwóch braci.',
+    'about.title2': 'Jeden cel.',
+    'about.stat1': 'lata doświadczenia',
+    'about.stat2': 'zrealizowanych projektów',
+    'about.stat3': 'technologie CMS',
+    'about.stat4': 'podejście do jakości',
+    'about.text': 'Od ponad dwóch lat projektujemy i tworzymy strony internetowe — od kompletnych stron firmowych po współpracę ze specjalistami od brandingu i identyfikacji wizualnej. Tworzymy nowoczesne strony, które łączą estetykę z funkcjonalnością i są w pełni dopasowane do potrzeb klientów oraz ich biznesów.',
+    'stack.label': 'Technologie',
+    'contact.label': 'Kontakt',
+    'contact.title1': 'Masz projekt?',
+    'contact.title2': 'Porozmawiajmy.',
+    'form.name': 'Imię i nazwisko',
+    'form.email': 'Email',
+    'form.subject': 'Temat',
+    'form.message': 'Wiadomość',
+    'form.send': 'Wyślij wiadomość',
+    'footer.copy': '© 2025 LodWorks. Wszelkie prawa zastrzeżone.',
+  },
+  en: {
+    'nav.projects': 'Projects',
+    'nav.about': 'About',
+    'nav.stack': 'Stack',
+    'nav.contact': 'Contact',
+    'hero.eyebrow': 'Web Design & Development Studio',
+    'hero.title1': 'Websites that',
+    'hero.title2': 'actually work.',
+    'hero.desc': 'We build modern websites, e-commerce stores and digital products. We combine aesthetics with functionality.',
+    'hero.cta': 'View projects',
+    'projects.label': 'Selected projects',
+    'p.lektoria': 'Math tutoring platform — a complete website with privacy policy and terms of service, designed for students and parents.',
+    'p.hexasphere': 'Corporate website with modern design — crafted with attention to visual identity and user experience.',
+    'p.szkoly': 'Educational website for a training institution — clear structure, full of information for applicants and parents.',
+    'p.piekna': 'A purpose-driven project — a website combining aesthetics with message. Collaboration with a lifestyle & well-being brand.',
+    'p.truetoweb': 'Our previous studio brand — a website presenting web design services and work for clients across various industries.',
+    'about.label': 'About us',
+    'about.title1': 'Two brothers.',
+    'about.title2': 'One goal.',
+    'about.stat1': 'years of experience',
+    'about.stat2': 'completed projects',
+    'about.stat3': 'CMS technologies',
+    'about.stat4': 'approach to quality',
+    'about.text': 'For over two years we have been designing and building websites — from complete corporate sites to collaborations with branding and visual identity specialists. We create modern websites that combine aesthetics with functionality and are fully tailored to the needs of our clients and their businesses.',
+    'stack.label': 'Technologies',
+    'contact.label': 'Contact',
+    'contact.title1': 'Got a project?',
+    'contact.title2': "Let's talk.",
+    'form.name': 'Full name',
+    'form.email': 'Email',
+    'form.subject': 'Subject',
+    'form.message': 'Message',
+    'form.send': 'Send message',
+    'footer.copy': '© 2025 LodWorks. All rights reserved.',
+  }
+};
+
+let currentLang = 'pl';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[lang][key]) el.textContent = i18n[lang][key];
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+  });
+  document.documentElement.lang = lang;
+}
+
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.submit-btn');
+  btn.textContent = currentLang === 'pl' ? 'Wysłano ✓' : 'Sent ✓';
+  btn.style.background = '#2A7A4A';
+  setTimeout(() => {
+    btn.textContent = i18n[currentLang]['form.send'];
+    btn.style.background = '';
+    e.target.reset();
+  }, 3000);
+}
+</script>
+</body>
+</html>
