@@ -52,7 +52,7 @@ nav.scrolled{background:rgba(250,250,248,0.95);backdrop-filter:blur(12px);border
 
 /* HERO */
 .hero{min-height:100vh;padding:120px 56px 80px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;}
-.hero-bg-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--display);font-size:clamp(120px,18vw,280px);font-weight:900;color:transparent;-webkit-text-stroke:1px var(--border);white-space:nowrap;pointer-events:none;user-select:none;letter-spacing:-0.03em;line-height:1;}
+.hero-bg-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--display);font-size:clamp(120px,18vw,280px);font-weight:900;color:transparent;-webkit-text-stroke:1px var(--border);white-space:nowrap;pointer-events:none;user-select:none;letter-spacing:-0.03em;line-height:1;z-index: -1;}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(212,82,42,0.2);padding:6px 14px;border-radius:20px;margin-bottom:32px;width:fit-content;}
 .hero-badge-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s ease-in-out infinite;}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.8);}}
