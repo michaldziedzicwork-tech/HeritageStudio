@@ -3,807 +3,844 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LodWorks — Web Design & Development Studio</title>
-<meta name="description" content="LodWorks — studio tworzenia stron internetowych. Strony, sklepy, produkty cyfrowe.">
+<title>LodWorks — Web Design Studio</title>
+<meta name="description" content="LodWorks — premium web design studio. Strony, sklepy, produkty cyfrowe które sprzedają.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Syne:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#FAFAF8;
+  --ink:#0E0E0C;
+  --ink2:#5A5954;
+  --ink3:#A8A49E;
+  --accent:#D4522A;
+  --accent2:#1A1A18;
+  --white:#FFFFFF;
+  --border:#E8E4DC;
+  --surface:#F2F0EB;
+  --display:'Playfair Display',serif;
+  --ui:'Syne',sans-serif;
+  --body:'Instrument Serif',serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--ui);background:var(--bg);color:var(--ink);overflow-x:hidden;cursor:none;}
+::selection{background:var(--accent);color:#fff;}
 
-  :root {
-    --bg: #F8F6F1;
-    --ink: #1A1916;
-    --ink2: #6B6860;
-    --ink3: #B0ADA6;
-    --accent: #C8472A;
-    --white: #FFFFFF;
-    --border: #E2DED6;
-    --serif: 'DM Serif Display', serif;
-    --sans: 'DM Sans', sans-serif;
-  }
+/* CUSTOM CURSOR */
+#cursor{position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.15s ease,width 0.3s ease,height 0.3s ease,background 0.3s ease;mix-blend-mode:multiply;}
+#cursor-ring{position:fixed;width:36px;height:36px;border:1px solid var(--accent);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform 0.08s ease,width 0.3s ease,height 0.3s ease,opacity 0.3s ease;opacity:0.5;}
+body:hover #cursor{opacity:1;}
 
-  html { scroll-behavior: smooth; }
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 56px;height:68px;display:flex;align-items:center;justify-content:space-between;transition:background 0.4s,border-color 0.4s;border-bottom:1px solid transparent;}
+nav.scrolled{background:rgba(250,250,248,0.95);backdrop-filter:blur(12px);border-color:var(--border);}
+.nav-logo{font-family:var(--display);font-size:21px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-0.01em;}
+.nav-logo em{font-style:italic;color:var(--accent);}
+.nav-center{display:flex;gap:36px;list-style:none;position:absolute;left:50%;transform:translateX(-50%);}
+.nav-center a{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink2);text-decoration:none;transition:color 0.2s;}
+.nav-center a:hover{color:var(--ink);}
+.nav-right{display:flex;align-items:center;gap:20px;}
+.lang-toggle{display:flex;}
+.lang-btn{padding:5px 9px;border:1px solid var(--border);background:none;cursor:none;font-family:var(--ui);font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);transition:all 0.2s;}
+.lang-btn:first-child{border-radius:3px 0 0 3px;}
+.lang-btn:last-child{border-radius:0 3px 3px 0;border-left:none;}
+.lang-btn.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+.nav-cta{font-family:var(--ui);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#fff;background:var(--accent);border:none;padding:10px 22px;border-radius:2px;cursor:none;text-decoration:none;transition:background 0.2s;}
+.nav-cta:hover{background:var(--ink);}
 
-  body {
-    font-family: var(--sans);
-    background: var(--bg);
-    color: var(--ink);
-    font-size: 16px;
-    line-height: 1.6;
-    font-weight: 300;
-  }
+/* HERO */
+.hero{min-height:100vh;padding:120px 56px 80px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;}
+.hero-bg-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--display);font-size:clamp(120px,18vw,280px);font-weight:900;color:transparent;-webkit-text-stroke:1px var(--border);white-space:nowrap;pointer-events:none;user-select:none;letter-spacing:-0.03em;line-height:1;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(212,82,42,0.2);padding:6px 14px;border-radius:20px;margin-bottom:32px;width:fit-content;}
+.hero-badge-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.8);}}
+.hero-main{display:grid;grid-template-columns:1fr auto;align-items:flex-end;gap:60px;}
+.hero-title{font-family:var(--display);font-size:clamp(52px,7.5vw,118px);font-weight:900;line-height:0.9;letter-spacing:-0.03em;color:var(--ink);}
+.hero-title .line2{font-style:italic;font-weight:400;color:var(--accent);}
+.hero-title .line3{color:var(--ink);}
+.hero-right-col{display:flex;flex-direction:column;gap:28px;max-width:320px;padding-bottom:8px;}
+.hero-desc{font-size:16px;line-height:1.75;color:var(--ink2);font-family:var(--body);}
+.hero-actions{display:flex;flex-direction:column;gap:12px;}
+.btn-primary{display:inline-flex;align-items:center;justify-content:space-between;gap:16px;font-family:var(--ui);font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#fff;background:var(--ink);text-decoration:none;padding:16px 24px;border-radius:3px;transition:background 0.2s;}
+.btn-primary:hover{background:var(--accent);}
+.btn-primary .arrow{font-size:18px;transition:transform 0.2s;}
+.btn-primary:hover .arrow{transform:translate(3px,-3px);}
+.btn-secondary{font-family:var(--ui);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink2);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color 0.2s;}
+.btn-secondary:hover{color:var(--accent);}
+.btn-secondary::before{content:'';display:block;width:20px;height:1px;background:currentColor;}
+.hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;}
+.hero-scroll span{font-size:9px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink3);}
+.hero-scroll-line{width:1px;height:48px;background:linear-gradient(to bottom,var(--ink3),transparent);animation:scrollline 1.8s ease-in-out infinite;}
+@keyframes scrollline{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}51%{transform:scaleY(1);transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+.hero-stats{margin-top:56px;padding-top:40px;border-top:1px solid var(--border);display:flex;gap:0;align-items:stretch;}
+.hero-stat{flex:1;padding:0 40px 0 0;border-right:1px solid var(--border);}
+.hero-stat:first-child{padding-left:0;}
+.hero-stat:last-child{border-right:none;padding-right:0;padding-left:40px;}
+.hero-stat:not(:first-child):not(:last-child){padding-left:40px;}
+.hero-stat-num{font-family:var(--display);font-size:48px;font-weight:700;letter-spacing:-0.03em;color:var(--ink);line-height:1;}
+.hero-stat-label{font-size:11px;font-weight:500;letter-spacing:0.06em;color:var(--ink3);margin-top:6px;text-transform:uppercase;}
 
-  ::selection { background: var(--accent); color: var(--white); }
+/* MARQUEE */
+.marquee-wrap{background:var(--ink);padding:16px 0;overflow:hidden;border-top:1px solid #2a2a28;border-bottom:1px solid #2a2a28;}
+.marquee-track{display:flex;gap:0;animation:marquee 22s linear infinite;white-space:nowrap;}
+.marquee-track span{font-family:var(--ui);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.35);padding:0 32px;flex-shrink:0;}
+.marquee-track span.sep{color:var(--accent);font-size:14px;padding:0;}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 22px 48px;
-    background: var(--bg);
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.3s;
-  }
-  nav.scrolled { border-color: var(--border); }
+/* PROJECTS */
+.projects{padding:120px 0;}
+.projects-header{padding:0 56px 64px;display:flex;align-items:flex-end;justify-content:space-between;}
+.section-eyebrow{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
+.section-title{font-family:var(--display);font-size:clamp(36px,4vw,58px);font-weight:700;line-height:1.05;letter-spacing:-0.02em;}
+.section-title em{font-style:italic;font-weight:400;}
+.projects-all-link{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink2);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color 0.2s;white-space:nowrap;padding-bottom:4px;}
+.projects-all-link:hover{color:var(--accent);}
+.projects-all-link::after{content:'→';}
 
-  .nav-logo {
-    font-family: var(--serif);
-    font-size: 22px;
-    color: var(--ink);
-    text-decoration: none;
-    letter-spacing: -0.01em;
-  }
-  .nav-logo span { color: var(--accent); }
+.projects-list{display:flex;flex-direction:column;}
+.project-row{display:grid;grid-template-columns:80px 1fr 180px 80px;align-items:center;padding:28px 56px;border-top:1px solid var(--border);text-decoration:none;color:inherit;transition:background 0.2s;gap:40px;position:relative;}
+.project-row:last-child{border-bottom:1px solid var(--border);}
+.project-row::before{content:'';position:absolute;inset:0;background:var(--surface);transform:scaleX(0);transform-origin:left;transition:transform 0.3s ease;}
+.project-row:hover::before{transform:scaleX(1);}
+.project-row>*{position:relative;z-index:1;}
+.project-row-num{font-family:var(--display);font-size:13px;font-weight:400;font-style:italic;color:var(--ink3);}
+.project-row-info{}
+.project-row-name{font-family:var(--display);font-size:28px;font-weight:700;letter-spacing:-0.01em;color:var(--ink);margin-bottom:4px;transition:color 0.2s;}
+.project-row:hover .project-row-name{color:var(--accent);}
+.project-row-desc{font-size:13px;color:var(--ink2);font-family:var(--body);}
+.project-row-tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;}
+.project-tag{font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);border:1px solid var(--border);padding:4px 10px;border-radius:2px;}
+.project-row-arrow{font-size:20px;color:var(--ink3);text-align:right;transition:color 0.2s,transform 0.2s;}
+.project-row:hover .project-row-arrow{color:var(--accent);transform:translate(4px,-4px);}
 
-  .nav-right { display: flex; align-items: center; gap: 32px; }
+/* SERVICES */
+.services{padding:120px 56px;background:var(--ink);color:#fff;}
+.services .section-eyebrow{color:rgba(212,82,42,0.8);}
+.services .section-title{color:#fff;}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.06);margin-top:64px;border:1px solid rgba(255,255,255,0.06);}
+.service-card{background:var(--ink);padding:48px 40px;transition:background 0.25s;position:relative;overflow:hidden;}
+.service-card::after{content:attr(data-num);position:absolute;bottom:-20px;right:-10px;font-family:var(--display);font-size:120px;font-weight:900;color:rgba(255,255,255,0.03);line-height:1;pointer-events:none;}
+.service-card:hover{background:#1a1a18;}
+.service-icon{width:44px;height:44px;border:1px solid rgba(255,255,255,0.1);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-bottom:32px;}
+.service-icon svg{width:20px;height:20px;stroke:rgba(255,255,255,0.45);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.service-title{font-family:var(--display);font-size:24px;font-weight:700;color:#fff;margin-bottom:14px;letter-spacing:-0.01em;}
+.service-desc{font-size:14px;line-height:1.75;color:rgba(255,255,255,0.45);font-family:var(--body);margin-bottom:28px;}
+.service-outcomes{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.service-outcomes li{font-size:12px;font-weight:500;letter-spacing:0.04em;color:rgba(255,255,255,0.35);display:flex;align-items:center;gap:8px;}
+.service-outcomes li::before{content:'';display:block;width:4px;height:4px;background:var(--accent);border-radius:50%;flex-shrink:0;}
+.service-price{margin-top:32px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.06);}
+.service-price-label{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:4px;}
+.service-price-val{font-family:var(--display);font-size:20px;font-weight:700;color:#fff;}
 
-  .nav-links { display: flex; gap: 28px; list-style: none; }
-  .nav-links a {
-    font-size: 13px;
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--ink2);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--ink); }
+/* PROCESS */
+.process{padding:120px 56px;}
+.process-inner{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start;}
+.process-left{}
+.process-steps{display:flex;flex-direction:column;gap:0;margin-top:48px;}
+.process-step{display:flex;gap:28px;padding:28px 0;border-bottom:1px solid var(--border);align-items:flex-start;}
+.process-step:first-child{border-top:1px solid var(--border);}
+.process-step-num{font-family:var(--display);font-size:13px;font-style:italic;color:var(--accent);flex-shrink:0;padding-top:2px;width:24px;}
+.process-step-body{}
+.process-step-title{font-family:var(--ui);font-size:15px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.process-step-desc{font-size:13px;line-height:1.7;color:var(--ink2);font-family:var(--body);}
+.process-right{padding-top:8px;}
+.process-quote{font-family:var(--display);font-size:clamp(28px,3.5vw,46px);font-weight:700;line-height:1.15;letter-spacing:-0.02em;color:var(--ink);margin-bottom:36px;}
+.process-quote em{font-style:italic;color:var(--accent);}
+.process-meta{display:flex;flex-direction:column;gap:20px;}
+.process-meta-item{display:flex;gap:16px;padding:20px;background:var(--surface);border-radius:4px;}
+.process-meta-icon{width:36px;height:36px;background:var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.process-meta-icon svg{width:16px;height:16px;stroke:var(--ink2);fill:none;stroke-width:1.5;stroke-linecap:round;}
+.process-meta-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px;}
+.process-meta-desc{font-size:12px;color:var(--ink2);font-family:var(--body);line-height:1.6;}
 
-  .lang-toggle {
-    display: flex; gap: 2px;
-    font-size: 12px; font-weight: 500;
-    letter-spacing: 0.06em;
-  }
-  .lang-btn {
-    padding: 4px 8px;
-    border: 1px solid var(--border);
-    background: none;
-    cursor: pointer;
-    font-family: var(--sans);
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    color: var(--ink2);
-    transition: all 0.2s;
-  }
-  .lang-btn:first-child { border-radius: 4px 0 0 4px; }
-  .lang-btn:last-child { border-radius: 0 4px 4px 0; }
-  .lang-btn.active { background: var(--ink); color: var(--white); border-color: var(--ink); }
+/* TESTIMONIALS */
+.testimonials{padding:120px 56px;background:var(--surface);}
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px;}
+.testimonial-card{background:var(--white);padding:40px 36px;border-radius:4px;display:flex;flex-direction:column;gap:20px;}
+.testimonial-stars{display:flex;gap:4px;}
+.testimonial-stars span{color:var(--accent);font-size:14px;}
+.testimonial-text{font-family:var(--body);font-size:16px;line-height:1.7;color:var(--ink);font-style:italic;flex:1;}
+.testimonial-author{display:flex;align-items:center;gap:14px;padding-top:20px;border-top:1px solid var(--border);}
+.testimonial-avatar{width:40px;height:40px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:16px;font-weight:700;color:var(--ink2);flex-shrink:0;}
+.testimonial-name{font-size:13px;font-weight:600;color:var(--ink);}
+.testimonial-role{font-size:11px;color:var(--ink3);}
 
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex; flex-direction: column;
-    justify-content: flex-end;
-    padding: 0 48px 72px;
-    position: relative;
-    overflow: hidden;
-  }
+/* PRODUCT */
+.product{padding:120px 56px;background:var(--ink);overflow:hidden;position:relative;}
+.product::before{content:'';position:absolute;top:-40%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(212,82,42,0.08) 0%,transparent 70%);pointer-events:none;}
+.product-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:1;}
+.product-eyebrow{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(212,82,42,0.7);margin-bottom:14px;}
+.product-title{font-family:var(--display);font-size:clamp(32px,3.5vw,52px);font-weight:700;line-height:1.1;letter-spacing:-0.02em;color:#fff;margin-bottom:20px;}
+.product-title em{font-style:italic;color:var(--accent);}
+.product-desc{font-family:var(--body);font-size:16px;line-height:1.75;color:rgba(255,255,255,0.5);margin-bottom:36px;}
+.product-cta{display:inline-flex;align-items:center;gap:12px;font-family:var(--ui);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,0.15);padding:14px 24px;border-radius:3px;text-decoration:none;transition:all 0.2s;}
+.product-cta:hover{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.3);}
+.product-visual{aspect-ratio:4/3;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.product-visual-inner{text-align:center;}
+.product-visual-icon{font-family:var(--display);font-size:72px;font-weight:900;color:rgba(255,255,255,0.05);line-height:1;}
+.product-visual-label{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-top:8px;}
+.product-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px;}
+.product-tag{font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.3);border:1px solid rgba(255,255,255,0.08);padding:5px 12px;border-radius:2px;}
 
-  .hero-eyebrow {
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink3);
-    margin-bottom: 20px;
-  }
+/* ABOUT */
+.about{padding:120px 56px;}
+.about-inner{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start;}
+.about-title{font-family:var(--display);font-size:clamp(36px,4vw,60px);font-weight:700;line-height:1.05;letter-spacing:-0.02em;margin-bottom:28px;}
+.about-title em{font-style:italic;color:var(--accent);}
+.about-text{font-family:var(--body);font-size:17px;line-height:1.8;color:var(--ink2);margin-bottom:36px;}
+.about-values{display:flex;flex-direction:column;gap:0;}
+.about-value{display:flex;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid var(--border);}
+.about-value:first-child{border-top:1px solid var(--border);}
+.about-value-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;flex-shrink:0;}
+.about-value-text{font-size:14px;font-weight:600;color:var(--ink);}
+.about-right{padding-top:48px;}
+.about-photo-placeholder{aspect-ratio:3/4;background:var(--surface);border-radius:4px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;position:relative;overflow:hidden;}
+.about-photo-placeholder::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--border) 25%,transparent 25%) -20px 0,linear-gradient(225deg,var(--border) 25%,transparent 25%) -20px 0,linear-gradient(315deg,var(--border) 25%,transparent 25%),linear-gradient(45deg,var(--border) 25%,transparent 25%);background-size:40px 40px;background-color:var(--surface);opacity:0.3;}
+.about-photo-label{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3);position:relative;z-index:1;}
+.about-cta{display:inline-flex;align-items:center;gap:12px;font-family:var(--ui);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:3px;transition:color 0.2s,border-color 0.2s;}
+.about-cta:hover{color:var(--accent);border-color:var(--accent);}
 
-  .hero-title {
-    font-family: var(--serif);
-    font-size: clamp(52px, 8vw, 120px);
-    line-height: 0.95;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    max-width: 900px;
-    margin-bottom: 40px;
-  }
+/* CONTACT */
+.contact{padding:120px 56px;background:var(--bg);position:relative;overflow:hidden;}
+.contact::before{content:'LodWorks';position:absolute;bottom:-40px;left:-20px;font-family:var(--display);font-size:clamp(100px,15vw,220px);font-weight:900;color:transparent;-webkit-text-stroke:1px var(--border);pointer-events:none;user-select:none;line-height:1;}
+.contact-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start;}
+.contact-title{font-family:var(--display);font-size:clamp(40px,5vw,76px);font-weight:900;line-height:0.95;letter-spacing:-0.03em;color:var(--ink);margin-bottom:28px;}
+.contact-title em{font-style:italic;color:var(--accent);}
+.contact-desc{font-family:var(--body);font-size:17px;line-height:1.75;color:var(--ink2);margin-bottom:40px;}
+.contact-links{display:flex;flex-direction:column;gap:12px;}
+.contact-link{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink);transition:color 0.2s;group:true;}
+.contact-link:hover{color:var(--accent);}
+.contact-link-label{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);width:64px;flex-shrink:0;}
+.contact-link-val{font-family:var(--body);font-size:16px;}
+form{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:4px;overflow:hidden;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;}
+.field{display:flex;flex-direction:column;border-bottom:1px solid var(--border);border-right:1px solid var(--border);position:relative;}
+.field:nth-child(even){border-right:none;}
+.field.full{grid-column:1/-1;border-right:none;}
+.field label{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);padding:16px 20px 0;}
+.field input,.field textarea,.field select{font-family:var(--body);font-size:15px;color:var(--ink);background:transparent;border:none;padding:6px 20px 16px;outline:none;resize:none;width:100%;}
+.field input::placeholder,.field textarea::placeholder{color:var(--ink3);}
+.field textarea{min-height:100px;}
+.form-submit{background:none;border:none;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;cursor:none;transition:background 0.2s;}
+.form-submit:hover{background:var(--surface);}
+.form-submit-text{font-family:var(--ui);font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink);}
+.form-submit-arrow{width:40px;height:40px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;transition:background 0.2s,transform 0.2s;}
+.form-submit:hover .form-submit-arrow{background:var(--ink);transform:translate(2px,-2px);}
 
-  .hero-title em {
-    font-style: italic;
-    color: var(--accent);
-  }
+/* FOOTER */
+footer{padding:24px 56px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.footer-logo{font-family:var(--display);font-size:18px;font-weight:700;color:var(--ink);text-decoration:none;}
+.footer-logo em{font-style:italic;color:var(--accent);}
+.footer-copy{font-size:11px;font-weight:500;letter-spacing:0.04em;color:var(--ink3);}
+.footer-right{display:flex;gap:24px;}
+.footer-right a{font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink3);text-decoration:none;transition:color 0.2s;}
+.footer-right a:hover{color:var(--ink);}
 
-  .hero-bottom {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 40px;
-  }
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:none;}
+.reveal-left{opacity:0;transform:translateX(-24px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal-left.visible{opacity:1;transform:none;}
 
-  .hero-desc {
-    font-size: 17px;
-    font-weight: 300;
-    color: var(--ink2);
-    max-width: 480px;
-    line-height: 1.7;
-  }
-
-  .hero-cta {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-size: 14px; font-weight: 500;
-    letter-spacing: 0.04em;
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid var(--ink);
-    padding-bottom: 2px;
-    white-space: nowrap;
-    transition: color 0.2s, border-color 0.2s;
-  }
-  .hero-cta:hover { color: var(--accent); border-color: var(--accent); }
-  .hero-cta svg { transition: transform 0.2s; }
-  .hero-cta:hover svg { transform: translate(3px, -3px); }
-
-  .hero-line {
-    position: absolute;
-    top: 0; right: 160px;
-    width: 1px; height: 100%;
-    background: var(--border);
-  }
-
-  .hero-number {
-    position: absolute;
-    top: 50%; right: 48px;
-    transform: translateY(-50%);
-    font-family: var(--serif);
-    font-size: 180px;
-    color: var(--border);
-    line-height: 1;
-    user-select: none;
-    pointer-events: none;
-  }
-
-  /* SECTIONS */
-  section { padding: 120px 48px; }
-
-  .section-label {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink3);
-    margin-bottom: 56px;
-    display: flex; align-items: center; gap: 16px;
-  }
-  .section-label::after {
-    content: '';
-    display: block;
-    width: 32px; height: 1px;
-    background: var(--ink3);
-  }
-
-  /* PROJECTS */
-  .projects { background: var(--white); }
-
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-  }
-
-  .project-card {
-    background: var(--white);
-    padding: 48px;
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    transition: background 0.25s;
-    position: relative;
-    overflow: hidden;
-  }
-  .project-card:hover { background: var(--bg); }
-
-  .project-card::after {
-    content: '↗';
-    position: absolute;
-    top: 40px; right: 48px;
-    font-size: 20px;
-    color: var(--ink3);
-    transition: color 0.2s, transform 0.2s;
-  }
-  .project-card:hover::after { color: var(--accent); transform: translate(3px, -3px); }
-
-  .project-num {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    color: var(--ink3);
-  }
-
-  .project-name {
-    font-family: var(--serif);
-    font-size: 28px;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    line-height: 1.1;
-  }
-
-  .project-desc {
-    font-size: 14px;
-    font-weight: 300;
-    color: var(--ink2);
-    line-height: 1.6;
-    margin-top: auto;
-  }
-
-  .project-tags {
-    display: flex; flex-wrap: wrap; gap: 6px;
-    margin-top: 8px;
-  }
-  .tag {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--ink3);
-    border: 1px solid var(--border);
-    padding: 3px 10px;
-    border-radius: 2px;
-  }
-  .placeholder-inner { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; min-height: 220px; border: 1.5px dashed var(--border); border-radius: 4px; gap: 10px; }
-  .placeholder-inner p { font-size: 12px; font-weight: 400; letter-spacing: 0.06em; color: var(--ink3); text-align: center; line-height: 1.6; }
-  .placeholder-inner .plus { font-family: var(--serif); font-size: 32px; color: var(--border); }
-  
-  /* ABOUT */
-  .about { background: var(--white); }
-  .about-inner { display: grid; grid-template-columns: 5fr 4fr; gap: 80px; align-items: start; }
-  .about-title { font-family: var(--serif); font-size: clamp(40px, 4.5vw, 64px); line-height: 1.05; letter-spacing: -0.025em; margin-bottom: 32px; }
-  .about-title em { font-style: italic; color: var(--accent); }
-  .about-text { font-size: 16px; font-weight: 300; color: var(--ink2); line-height: 1.85; }
-  .about-stats { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border); }
-  .stat-box { padding: 32px 28px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .stat-box:nth-child(even) { border-right: none; }
-  .stat-box:nth-last-child(-n+2) { border-bottom: none; }
-  .stat-num { font-family: var(--serif); font-size: 44px; letter-spacing: -0.02em; color: var(--ink); line-height: 1; }
-  .stat-label { font-size: 12px; font-weight: 300; color: var(--ink2); margin-top: 6px; }
-
-  /* STACK */
-  .stack { background: var(--bg); }
-
-  .stack-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .stack-item {
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--ink);
-    border: 1px solid var(--border);
-    padding: 10px 20px;
-    border-radius: 2px;
-    transition: all 0.2s;
-    cursor: default;
-  }
-  .stack-item:hover {
-    background: var(--ink);
-    color: var(--white);
-    border-color: var(--ink);
-  }
-
-  /* CONTACT */
-  .contact-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
-  }
-
-  .contact-title {
-    font-family: var(--serif);
-    font-size: clamp(36px, 4vw, 56px);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-  }
-  .contact-title em { font-style: italic; color: var(--accent); }
-
-  .contact-email {
-    display: inline-block;
-    font-family: var(--serif);
-    font-size: 20px;
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid var(--ink);
-    padding-bottom: 2px;
-    margin-bottom: 40px;
-    transition: color 0.2s, border-color 0.2s;
-  }
-  .contact-email:hover { color: var(--accent); border-color: var(--accent); }
-
-  form { display: flex; flex-direction: column; gap: 20px; }
-
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
-  .field { display: flex; flex-direction: column; gap: 8px; }
-
-  label {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink3);
-  }
-
-  input, textarea {
-    font-family: var(--sans);
-    font-size: 15px;
-    font-weight: 300;
-    color: var(--ink);
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 2px;
-    padding: 14px 16px;
-    outline: none;
-    transition: border-color 0.2s;
-    width: 100%;
-  }
-  input:focus, textarea:focus { border-color: var(--ink); }
-  textarea { resize: vertical; min-height: 120px; }
-
-  .submit-btn {
-    align-self: flex-start;
-    font-family: var(--sans);
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--white);
-    background: var(--ink);
-    border: none;
-    padding: 16px 36px;
-    cursor: pointer;
-    border-radius: 2px;
-    transition: background 0.2s;
-  }
-  .submit-btn:hover { background: var(--accent); }
-
-  /* OFFER */
-  .offer { background: var(--ink); color: var(--white); }
-  .offer .section-label { color: rgba(255,255,255,0.3); }
-  .offer .section-label::after { background: rgba(255,255,255,0.3); }
-  .offer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.08); }
-  .offer-card { background: var(--ink); padding: 48px 40px; transition: background 0.25s; }
-  .offer-card:hover { background: #232119; }
-  .offer-icon { width: 40px; height: 40px; margin-bottom: 28px; border: 1px solid rgba(255,255,255,0.12); border-radius: 4px; display: flex; align-items: center; justify-content: center; }
-  .offer-icon svg { width: 18px; height: 18px; stroke: rgba(255,255,255,0.5); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-  .offer-num { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: rgba(255,255,255,0.25); margin-bottom: 16px; }
-  .offer-title { font-family: var(--serif); font-size: 26px; letter-spacing: -0.01em; color: var(--white); margin-bottom: 16px; line-height: 1.1; }
-  .offer-desc { font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.75; margin-bottom: 28px; }
-  .offer-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-  .offer-list li { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.4); display: flex; align-items: center; gap: 8px; }
-  .offer-list li::before { content: ''; display: block; width: 4px; height: 4px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
-
-  /* TICKER */
-  .hero-ticker-wrap { overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 10px 0; margin-top: 50px; }
-  .hero-ticker { display: flex; gap: 48px; white-space: nowrap; animation: ticker 18s linear infinite; }
-  .hero-ticker span { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink3); flex-shrink: 0; }
-  .hero-ticker span.dot { color: var(--accent); font-size: 8px; }
-  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-
-  /* FOOTER */
-  footer {
-    padding: 32px 48px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .footer-logo {
-    font-family: var(--serif);
-    font-size: 18px;
-    color: var(--ink);
-    text-decoration: none;
-  }
-  .footer-logo span { color: var(--accent); }
-
-  .footer-copy {
-    font-size: 12px;
-    font-weight: 300;
-    color: var(--ink3);
-  }
-
-  /* ANIMATIONS */
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: none;
-  }
-
-  /* MOBILE */
-  @media (max-width: 768px) {
-    nav { padding: 18px 24px; }
-    .nav-links { display: none; }
-    .hero { padding: 0 24px 56px; }
-    .hero-number { display: none; }
-    .hero-line { display: none; }
-    .offer-grid { grid-template-columns: 1fr; }
-    .hero-bottom { flex-direction: column; align-items: flex-start; }
-    section { padding: 80px 24px; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .about-inner { grid-template-columns: 1fr; gap: 40px; }
-    .contact-inner { grid-template-columns: 1fr; gap: 40px; }
-    .form-row { grid-template-columns: 1fr; }
-    footer { flex-direction: column; gap: 12px; text-align: center; }
-  }
+/* MOBILE */
+@media(max-width:960px){
+  nav{padding:0 24px;}
+  .nav-center{display:none;}
+  .hero{padding:100px 24px 60px;}
+  .hero-bg-text{display:none;}
+  .hero-main{grid-template-columns:1fr;gap:40px;}
+  .hero-right-col{max-width:100%;}
+  .hero-stats{flex-wrap:wrap;gap:24px;}
+  .hero-stat{min-width:calc(50% - 12px);border-right:none !important;padding:0 !important;}
+  section{padding:80px 24px;}
+  .projects-header{padding:0 24px 48px;}
+  .project-row{grid-template-columns:40px 1fr auto;padding:20px 24px;gap:16px;}
+  .project-row-tags{display:none;}
+  .services-grid{grid-template-columns:1fr;}
+  .process-inner{grid-template-columns:1fr;gap:48px;}
+  .testimonials-grid{grid-template-columns:1fr;}
+  .product-inner{grid-template-columns:1fr;gap:48px;}
+  .about-inner{grid-template-columns:1fr;gap:48px;}
+  .about-right{padding-top:0;}
+  .contact-inner{grid-template-columns:1fr;gap:48px;}
+  .form-row{grid-template-columns:1fr;}
+  .field{border-right:none !important;}
+  footer{flex-direction:column;gap:16px;text-align:center;padding:24px;}
+  .footer-right{justify-content:center;}
+}
 </style>
 </head>
 <body>
 
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
 <nav id="nav">
-  <a href="#" class="nav-logo">Lod<span>Works</span></a>
+  <a href="#" class="nav-logo">Lod<em>Works</em></a>
+  <ul class="nav-center">
+    <li><a href="#projects" data-i18n="nav.work">Realizacje</a></li>
+    <li><a href="#services" data-i18n="nav.services">Usługi</a></li>
+    <li><a href="#about" data-i18n="nav.about">O nas</a></li>
+    <li><a href="#contact" data-i18n="nav.contact">Kontakt</a></li>
+  </ul>
   <div class="nav-right">
-    <ul class="nav-links">
-      <li><a href="#projects" data-i18n="nav.projects">Projekty</a></li>
-      <li><a href="#about" data-i18n="nav.about">O nas</a></li>
-      <li><a href="#stack" data-i18n="nav.stack">Stack</a></li>
-      <li><a href="#contact" data-i18n="nav.contact">Kontakt</a></li>
-    </ul>
     <div class="lang-toggle">
       <button class="lang-btn active" onclick="setLang('pl')">PL</button>
       <button class="lang-btn" onclick="setLang('en')">EN</button>
     </div>
+    <a href="#contact" class="nav-cta" data-i18n="nav.cta">Wycena</a>
   </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-line"></div>
-  <div class="hero-number">W</div>
-  <p class="hero-eyebrow reveal" data-i18n="hero.eyebrow">Web Design & Development Studio</p>
-  <h1 class="hero-title reveal" style="transition-delay:0.1s">
-    <span data-i18n="hero.title1">Strony, które</span><br>
-    <em data-i18n="hero.title2">naprawdę działają.</em>
-  </h1>
-  <div class="hero-bottom reveal" style="transition-delay:0.2s">
-    <p class="hero-desc" data-i18n="hero.desc">
-      Tworzymy nowoczesne strony internetowe, sklepy e-commerce i produkty cyfrowe. Łączymy estetykę z funkcjonalnością.
-    </p>
-    <a href="#projects" class="hero-cta">
-      <span data-i18n="hero.cta">Zobacz projekty</span>
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
+  <div class="hero-bg-text">LODWORKS</div>
+
+  <div class="hero-badge reveal">
+    <span class="hero-badge-dot"></span>
+    <span data-i18n="hero.badge">Otwarte na nowe projekty</span>
   </div>
-  <div class="hero-right reveal" style="transition-delay:.2s">
-    <div class="hero-ticker-wrap">
-      <div class="hero-ticker">
-        <span data-i18n="tk.s1">Strony internetowe</span><span class="dot">◆</span>
-        <span data-i18n="tk.s2">Sklepy e-commerce</span><span class="dot">◆</span>
-        <span data-i18n="tk.s3">Produkty cyfrowe</span><span class="dot">◆</span>
-        <span data-i18n="tk.s4">WordPress</span><span class="dot">◆</span>
-        <span data-i18n="tk.s5">Webflow</span><span class="dot">◆</span>
-        <span data-i18n="tk.s6">React</span><span class="dot">◆</span>
-        <span data-i18n="tk.s1">Strony internetowe</span><span class="dot">◆</span>
-        <span data-i18n="tk.s2">Sklepy e-commerce</span><span class="dot">◆</span>
-        <span data-i18n="tk.s3">Produkty cyfrowe</span><span class="dot">◆</span>
-        <span data-i18n="tk.s4">WordPress</span><span class="dot">◆</span>
-        <span data-i18n="tk.s5">Webflow</span><span class="dot">◆</span>
-        <span data-i18n="tk.s6">React</span><span class="dot">◆</span>
+
+  <div class="hero-main">
+    <h1 class="hero-title reveal" style="transition-delay:.06s">
+      <span class="line1" data-i18n="hero.t1">Strony, które</span><br>
+      <span class="line2" data-i18n="hero.t2">zamieniają</span><br>
+      <span class="line3" data-i18n="hero.t3">odwiedziny w klientów.</span>
+    </h1>
+    <div class="hero-right-col reveal" style="transition-delay:.14s">
+      <p class="hero-desc" data-i18n="hero.desc">Projektujemy i budujemy premium strony internetowe oraz sklepy dla małych i średnich firm. Bez szablonów. Z precyzją.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">
+          <span data-i18n="hero.cta1">Rozpocznij projekt</span>
+          <span class="arrow">↗</span>
+        </a>
+        <a href="#projects" class="btn-secondary" data-i18n="hero.cta2">Zobacz realizacje</a>
       </div>
     </div>
+  </div>
 
+  <div class="hero-stats reveal" style="transition-delay:.22s">
+    <div class="hero-stat">
+      <div class="hero-stat-num">2+</div>
+      <div class="hero-stat-label" data-i18n="stat.exp">Lata doświadczenia</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">5+</div>
+      <div class="hero-stat-label" data-i18n="stat.proj">Zrealizowanych projektów</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">3</div>
+      <div class="hero-stat-label" data-i18n="stat.tech">Platformy CMS</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">100%</div>
+      <div class="hero-stat-label" data-i18n="stat.custom">Customowe projekty</div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span data-i18n="hero.scroll">Przewiń</span>
+    <div class="hero-scroll-line"></div>
+  </div>
 </section>
 
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span data-i18n="mq.s1">Strony internetowe</span><span class="sep">◆</span>
+    <span data-i18n="mq.s2">Sklepy e-commerce</span><span class="sep">◆</span>
+    <span data-i18n="mq.s3">Produkty cyfrowe</span><span class="sep">◆</span>
+    <span data-i18n="mq.s4">WordPress</span><span class="sep">◆</span>
+    <span data-i18n="mq.s5">Webflow</span><span class="sep">◆</span>
+    <span data-i18n="mq.s6">WooCommerce</span><span class="sep">◆</span>
+    <span data-i18n="mq.s7">React</span><span class="sep">◆</span>
+    <span data-i18n="mq.s8">UI/UX Design</span><span class="sep">◆</span>
+    <span data-i18n="mq.s1">Strony internetowe</span><span class="sep">◆</span>
+    <span data-i18n="mq.s2">Sklepy e-commerce</span><span class="sep">◆</span>
+    <span data-i18n="mq.s3">Produkty cyfrowe</span><span class="sep">◆</span>
+    <span data-i18n="mq.s4">WordPress</span><span class="sep">◆</span>
+    <span data-i18n="mq.s5">Webflow</span><span class="sep">◆</span>
+    <span data-i18n="mq.s6">WooCommerce</span><span class="sep">◆</span>
+    <span data-i18n="mq.s7">React</span><span class="sep">◆</span>
+    <span data-i18n="mq.s8">UI/UX Design</span><span class="sep">◆</span>
+  </div>
+</div>
 
-
+<!-- PROJECTS -->
 <section class="projects" id="projects">
-  <p class="section-label reveal" data-i18n="projects.label">Wybrane projekty</p>
-  <div class="projects-grid">
-
-    <a href="https://lektoria.webflow.io" target="_blank" rel="noopener" class="project-card reveal">
-      <span class="project-num">01</span>
-      <h3 class="project-name">Lektoria</h3>
-      <p class="project-desc" data-i18n="p.lektoria">Platforma do korepetycji matematycznych — kompletna strona z polityką prywatności i regulaminem, zaprojektowana z myślą o uczniach i rodzicach.</p>
-      <div class="project-tags">
-        <span class="tag">Webflow</span>
-        <span class="tag">Education</span>
-      </div>
-    </a>
-
-    <a href="https://hexasphere.pl" target="_blank" rel="noopener" class="project-card reveal" style="transition-delay:0.05s">
-      <span class="project-num">02</span>
-      <h3 class="project-name">Hexasphere</h3>
-      <p class="project-desc" data-i18n="p.hexasphere">Strona firmowa z nowoczesnym designem — zaprojektowana z dbałością o identyfikację wizualną i doświadczenie użytkownika.</p>
-      <div class="project-tags">
-        <span class="tag">WordPress</span>
-        <span class="tag">Branding</span>
-      </div>
-    </a>
-
-    <a href="https://szkolyrzemiosl.edu.pl" target="_blank" rel="noopener" class="project-card reveal" style="transition-delay:0.1s">
-      <span class="project-num">03</span>
-      <h3 class="project-name">Szkoły Rzemiosł</h3>
-      <p class="project-desc" data-i18n="p.szkoly">Strona edukacyjna dla instytucji szkoleniowej — przejrzysta struktura, pełna informacji dla kandydatów i rodziców.</p>
-      <div class="project-tags">
-        <span class="tag">WordPress</span>
-        <span class="tag">Education</span>
-      </div>
-    </a>
-
-    <a href="https://jestespiekna.mocniwduchu.pl" target="_blank" rel="noopener" class="project-card reveal" style="transition-delay:0.15s">
-      <span class="project-num">04</span>
-      <h3 class="project-name">Jesteś Piękna</h3>
-      <p class="project-desc" data-i18n="p.piekna">Projekt z misją — strona łącząca estetykę z przekazem. Współpraca z marką lifestyle i well-being.</p>
-      <div class="project-tags">
-        <span class="tag">WordPress</span>
-        <span class="tag">Lifestyle</span>
-      </div>
-    </a>
-
-    <a href="https://truetoweb.com" target="_blank" rel="noopener" class="project-card reveal" style="transition-delay:0.2s">
-      <span class="project-num">05</span>
-      <h3 class="project-name">TrueToWeb</h3>
-      <p class="project-desc" data-i18n="p.truetoweb">Poprzednia marka studia — strona prezentująca usługi web designu i realizacje dla klientów z różnych branż.</p>
-      <div class="project-tags">
-        <span class="tag">WordPress</span>
-        <span class="tag">Agency</span>
-      </div>
-    </a>
-    <div class="project-card placeholder reveal" style="transition-delay:.30s">
-      <div class="placeholder-inner">
-        <span class="plus">+</span>
-        <p data-i18n="p.coming">Kolejny projekt<br>wkrótce</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="stack" id="stack">
-  <p class="section-label reveal" data-i18n="stack.label">Technologie</p>
-  <div class="stack-grid reveal" style="transition-delay:0.1s">
-    <div class="stack-item">HTML</div>
-    <div class="stack-item">CSS</div>
-    <div class="stack-item">JavaScript</div>
-    <div class="stack-item">TypeScript</div>
-    <div class="stack-item">React</div>
-    <div class="stack-item">WordPress</div>
-    <div class="stack-item">WooCommerce</div>
-    <div class="stack-item">Webflow</div>
-    <div class="stack-item">Figma</div>
-    <div class="stack-item">Git</div>
-  </div>
-</section>
-
-<section class="about" id="about">
-  <p class="section-label reveal" data-i18n="sec.about">O nas</p>
-  <div class="about-inner">
+  <div class="projects-header reveal">
     <div>
-      <h2 class="about-title reveal"><span data-i18n="ab.t1">Dwóch braci</span><br><em data-i18n="ab.t2">z Łodzi.</em></h2>
-      <p class="about-text reveal" style="transition-delay:.1s" data-i18n="ab.text">Od ponad dwóch lat projektujemy i tworzymy strony internetowe — od kompletnych stron firmowych po współpracę ze specjalistami od brandingu i identyfikacji wizualnej. Tworzymy nowoczesne strony, które łączą estetykę z funkcjonalnością i są w pełni dopasowane do potrzeb klientów oraz ich biznesów. Działamy lokalnie i globalnie.</p>
+      <p class="section-eyebrow" data-i18n="sec.projects">Wybrane realizacje</p>
+      <h2 class="section-title"><span data-i18n="proj.t1">Projekty, które</span> <em data-i18n="proj.t2">działają.</em></h2>
     </div>
-    <div class="reveal" style="transition-delay:.15s">
-      <div class="about-stats">
-        <div class="stat-box"><div class="stat-num">2+</div><div class="stat-label" data-i18n="ab.s1">lata doświadczenia</div></div>
-        <div class="stat-box"><div class="stat-num">5+</div><div class="stat-label" data-i18n="ab.s2">projektów</div></div>
-        <div class="stat-box"><div class="stat-num">3</div><div class="stat-label" data-i18n="ab.s3">platformy CMS</div></div>
-        <div class="stat-box"><div class="stat-num">∞</div><div class="stat-label" data-i18n="ab.s4">zaangażowanie</div></div>
+    <a href="#contact" class="projects-all-link" data-i18n="proj.link">Porozmawiaj o projekcie</a>
+  </div>
+  <div class="projects-list">
+    <a href="https://lektoria.webflow.io" target="_blank" rel="noopener" class="project-row reveal">
+      <span class="project-row-num">01</span>
+      <div class="project-row-info">
+        <div class="project-row-name">Lektoria</div>
+        <div class="project-row-desc" data-i18n="p.lektoria">Platforma korepetycji matematycznych — konwersja odwiedzających w uczniów.</div>
+      </div>
+      <div class="project-row-tags">
+        <span class="project-tag">Webflow</span>
+        <span class="project-tag">Education</span>
+      </div>
+      <span class="project-row-arrow">↗</span>
+    </a>
+    <a href="https://hexasphere.pl" target="_blank" rel="noopener" class="project-row reveal" style="transition-delay:.05s">
+      <span class="project-row-num">02</span>
+      <div class="project-row-info">
+        <div class="project-row-name">Hexasphere</div>
+        <div class="project-row-desc" data-i18n="p.hexasphere">Strona firmowa z pełną identyfikacją wizualną i premium designem.</div>
+      </div>
+      <div class="project-row-tags">
+        <span class="project-tag">WordPress</span>
+        <span class="project-tag">Branding</span>
+      </div>
+      <span class="project-row-arrow">↗</span>
+    </a>
+    <a href="https://szkolyrzemiosl.edu.pl" target="_blank" rel="noopener" class="project-row reveal" style="transition-delay:.1s">
+      <span class="project-row-num">03</span>
+      <div class="project-row-info">
+        <div class="project-row-name">Szkoły Rzemiosł</div>
+        <div class="project-row-desc" data-i18n="p.szkoly">Portal edukacyjny zwiększający liczbę zapisów na kursy szkoleniowe.</div>
+      </div>
+      <div class="project-row-tags">
+        <span class="project-tag">WordPress</span>
+        <span class="project-tag">Education</span>
+      </div>
+      <span class="project-row-arrow">↗</span>
+    </a>
+    <a href="https://jestespiekna.mocniwduchu.pl" target="_blank" rel="noopener" class="project-row reveal" style="transition-delay:.15s">
+      <span class="project-row-num">04</span>
+      <div class="project-row-info">
+        <div class="project-row-name">Jesteś Piękna</div>
+        <div class="project-row-desc" data-i18n="p.piekna">Strona lifestyle z misją — estetyka wspierająca przekaz marki.</div>
+      </div>
+      <div class="project-row-tags">
+        <span class="project-tag">WordPress</span>
+        <span class="project-tag">Lifestyle</span>
+      </div>
+      <span class="project-row-arrow">↗</span>
+    </a>
+    <a href="https://truetoweb.com" target="_blank" rel="noopener" class="project-row reveal" style="transition-delay:.2s">
+      <span class="project-row-num">05</span>
+      <div class="project-row-info">
+        <div class="project-row-name">TrueToWeb</div>
+        <div class="project-row-desc" data-i18n="p.truetoweb">Poprzednia marka studia — strona agencji webowej dla klientów B2B.</div>
+      </div>
+      <div class="project-row-tags">
+        <span class="project-tag">WordPress</span>
+        <span class="project-tag">Agency</span>
+      </div>
+      <span class="project-row-arrow">↗</span>
+    </a>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <p class="section-eyebrow reveal" data-i18n="sec.services">Co robimy</p>
+  <h2 class="section-title reveal" style="transition-delay:.06s"><span data-i18n="serv.t1">Usługi, które</span> <em data-i18n="serv.t2">przynoszą efekty.</em></h2>
+  <div class="services-grid">
+    <div class="service-card reveal" data-num="01">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+      <h3 class="service-title" data-i18n="s1.title">Strony internetowe</h3>
+      <p class="service-desc" data-i18n="s1.desc">Projekt i wdrożenie strony, która buduje zaufanie i prowadzi użytkownika do działania — od pierwszego kliknięcia do kontaktu.</p>
+      <ul class="service-outcomes">
+        <li data-i18n="s1.o1">Projekt UI/UX na miarę</li>
+        <li data-i18n="s1.o2">WordPress / Webflow</li>
+        <li data-i18n="s1.o3">Szybkość i SEO w standardzie</li>
+        <li data-i18n="s1.o4">Pełna responsywność</li>
+      </ul>
+      <div class="service-price">
+        <div class="service-price-label" data-i18n="s.from">Od</div>
+        <div class="service-price-val" data-i18n="s1.price">2 000 zł</div>
+      </div>
+    </div>
+    <div class="service-card reveal" style="transition-delay:.08s" data-num="02">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 01-8 0"/></svg></div>
+      <h3 class="service-title" data-i18n="s2.title">Sklepy e-commerce</h3>
+      <p class="service-desc" data-i18n="s2.desc">Sklep zoptymalizowany pod sprzedaż — prosty w obsłudze dla klienta, łatwy do zarządzania dla Ciebie. Gotowy na rynek globalny.</p>
+      <ul class="service-outcomes">
+        <li data-i18n="s2.o1">WooCommerce</li>
+        <li data-i18n="s2.o2">Integracja płatności</li>
+        <li data-i18n="s2.o3">Zarządzanie produktami</li>
+        <li data-i18n="s2.o4">Sprzedaż w wielu językach</li>
+      </ul>
+      <div class="service-price">
+        <div class="service-price-label" data-i18n="s.from">Od</div>
+        <div class="service-price-val" data-i18n="s2.price">4 000 zł</div>
+      </div>
+    </div>
+    <div class="service-card reveal" style="transition-delay:.16s" data-num="03">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+      <h3 class="service-title" data-i18n="s3.title">Produkty cyfrowe</h3>
+      <p class="service-desc" data-i18n="s3.desc">Szablony, narzędzia i aplikacje webowe — gotowe rozwiązania, które można sprzedawać lub udostępniać klientom jako wartość dodaną.</p>
+      <ul class="service-outcomes">
+        <li data-i18n="s3.o1">Szablony stron</li>
+        <li data-i18n="s3.o2">Narzędzia React / JS</li>
+        <li data-i18n="s3.o3">Dokumentacja i wsparcie</li>
+        <li data-i18n="s3.o4">Licencja komercyjna</li>
+      </ul>
+      <div class="service-price">
+        <div class="service-price-label" data-i18n="s.from">Od</div>
+        <div class="service-price-val" data-i18n="s3.price">500 zł</div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="offer" id="offer">
-  <p class="section-label reveal" data-i18n="sec.offer">Oferta</p>
-  <div class="offer-grid">
-    <div class="offer-card reveal">
-      <div class="offer-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-      <div class="offer-num">01</div>
-      <h3 class="offer-title" data-i18n="o1.title">Strony internetowe</h3>
-      <p class="offer-desc" data-i18n="o1.desc">Projektuję i wdrażam strony firmowe, landing pages oraz strony wizytówki dopasowane do Twojej marki i celów biznesowych.</p>
-      <ul class="offer-list">
-        <li data-i18n="o1.l1">Projekt UI/UX</li>
-        <li data-i18n="o1.l2">WordPress / Webflow</li>
-        <li data-i18n="o1.l3">Responsywność</li>
-        <li data-i18n="o1.l4">Optymalizacja SEO</li>
-      </ul>
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="process-inner">
+    <div>
+      <p class="section-eyebrow reveal" data-i18n="sec.process">Jak pracujemy</p>
+      <h2 class="section-title reveal" style="transition-delay:.06s"><span data-i18n="proc.t1">Sprawdzony</span> <em data-i18n="proc.t2">proces.</em></h2>
+      <div class="process-steps">
+        <div class="process-step reveal" style="transition-delay:.1s">
+          <span class="process-step-num">i.</span>
+          <div class="process-step-body">
+            <div class="process-step-title" data-i18n="ps1.title">Rozmowa i brief</div>
+            <p class="process-step-desc" data-i18n="ps1.desc">Zaczynamy od zrozumienia Twojego biznesu, klientów i celów. Żadnych szablonowych pytań — tylko to, co ważne.</p>
+          </div>
+        </div>
+        <div class="process-step reveal" style="transition-delay:.15s">
+          <span class="process-step-num">ii.</span>
+          <div class="process-step-body">
+            <div class="process-step-title" data-i18n="ps2.title">Projekt graficzny</div>
+            <p class="process-step-desc" data-i18n="ps2.desc">Przed napisaniem linii kodu widzisz gotowy projekt. Możesz ocenić i zgłosić uwagi zanim cokolwiek zostanie zbudowane.</p>
+          </div>
+        </div>
+        <div class="process-step reveal" style="transition-delay:.2s">
+          <span class="process-step-num">iii.</span>
+          <div class="process-step-body">
+            <div class="process-step-title" data-i18n="ps3.title">Budowa i wdrożenie</div>
+            <p class="process-step-desc" data-i18n="ps3.desc">Piszemy czysty, szybki kod. Testujemy na wszystkich urządzeniach. Wdrażamy i przekazujemy Ci stronę gotową do działania.</p>
+          </div>
+        </div>
+        <div class="process-step reveal" style="transition-delay:.25s">
+          <span class="process-step-num">iv.</span>
+          <div class="process-step-body">
+            <div class="process-step-title" data-i18n="ps4.title">Wsparcie po starcie</div>
+            <p class="process-step-desc" data-i18n="ps4.desc">Szkolimy z obsługi i pozostajemy do dyspozycji. Strona żyje razem z Twoim biznesem.</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="offer-card reveal" style="transition-delay:.08s">
-      <div class="offer-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 01-8 0"/></svg></div>
-      <div class="offer-num">02</div>
-      <h3 class="offer-title" data-i18n="o2.title">Sklepy e-commerce</h3>
-      <p class="offer-desc" data-i18n="o2.desc">Buduję sklepy internetowe gotowe do sprzedaży — z systemami płatności, zarządzaniem produktami i pełną integracją.</p>
-      <ul class="offer-list">
-        <li data-i18n="o2.l1">WooCommerce</li>
-        <li data-i18n="o2.l2">Konfiguracja płatności</li>
-        <li data-i18n="o2.l3">Zarządzanie produktami</li>
-        <li data-i18n="o2.l4">Sprzedaż globalna</li>
-      </ul>
-    </div>
-    <div class="offer-card reveal" style="transition-delay:.16s">
-      <div class="offer-icon"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
-      <div class="offer-num">03</div>
-      <h3 class="offer-title" data-i18n="o3.title">Produkty cyfrowe</h3>
-      <p class="offer-desc" data-i18n="o3.desc">Tworzę szablony, narzędzia webowe i aplikacje — gotowe produkty cyfrowe, które można sprzedawać lub oferować klientom.</p>
-      <ul class="offer-list">
-        <li data-i18n="o3.l1">Szablony stron</li>
-        <li data-i18n="o3.l2">Narzędzia webowe</li>
-        <li data-i18n="o3.l3">React / JS apps</li>
-        <li data-i18n="o3.l4">Dokumentacja</li>
-      </ul>
+    <div class="process-right reveal-left" style="transition-delay:.1s">
+      <p class="process-quote"><span data-i18n="pq.t1">Nie sprzedajemy stron.</span><br><em data-i18n="pq.t2">Sprzedajemy wyniki.</em></p>
+      <div class="process-meta">
+        <div class="process-meta-item">
+          <div class="process-meta-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div>
+            <div class="process-meta-title" data-i18n="pm1.t">Szybka realizacja</div>
+            <p class="process-meta-desc" data-i18n="pm1.d">Prosta strona: 7–14 dni. Sklep lub aplikacja: 3–6 tygodni. Bez przeciągania.</p>
+          </div>
+        </div>
+        <div class="process-meta-item">
+          <div class="process-meta-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          <div>
+            <div class="process-meta-title" data-i18n="pm2.t">Stały kontakt</div>
+            <p class="process-meta-desc" data-i18n="pm2.d">Jesteś na bieżąco przez cały czas. Żadnego milczenia przez 2 tygodnie.</p>
+          </div>
+        </div>
+        <div class="process-meta-item">
+          <div class="process-meta-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div>
+            <div class="process-meta-title" data-i18n="pm3.t">Gwarancja jakości</div>
+            <p class="process-meta-desc" data-i18n="pm3.d">30 dni poprawek po wdrożeniu w cenie. Twoja satysfakcja to nasz priorytet.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="contact">
-  <p class="section-label reveal" data-i18n="contact.label">Kontakt</p>
-  <div class="contact-inner">
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <p class="section-eyebrow reveal" data-i18n="sec.test">Opinie klientów</p>
+  <h2 class="section-title reveal" style="transition-delay:.06s"><span data-i18n="test.t1">Co mówią</span> <em data-i18n="test.t2">klienci.</em></h2>
+  <div class="testimonials-grid">
+    <div class="testimonial-card reveal" style="transition-delay:.08s">
+      <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <p class="testimonial-text" data-i18n="t1.text">"Strona dostarczona w 10 dni, dokładnie taka jak prosiłem. Pierwszy zapytanie o współpracę przyszło przez formularz kontaktowy już w pierwszym tygodniu."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">MK</div>
+        <div>
+          <div class="testimonial-name">Marek K.</div>
+          <div class="testimonial-role" data-i18n="t1.role">Właściciel firmy budowlanej</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal" style="transition-delay:.14s">
+      <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <p class="testimonial-text" data-i18n="t2.text">"Wiedziałam co chcę, ale nie umiałam tego opisać. Chłopaki zapytali właściwe pytania i stworzyli coś, co przekroczyło moje oczekiwania."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">AS</div>
+        <div>
+          <div class="testimonial-name">Anna S.</div>
+          <div class="testimonial-role" data-i18n="t2.role">Stylistka, marka osobista</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal" style="transition-delay:.2s">
+      <div class="testimonial-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <p class="testimonial-text" data-i18n="t3.text">"Sklep działa, płatności działają, Google mnie znalazło. To wszystko czego potrzebowałem. Polecam bez zastrzeżeń."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">TW</div>
+        <div>
+          <div class="testimonial-name">Tomasz W.</div>
+          <div class="testimonial-role" data-i18n="t3.role">E-commerce, branża sportowa</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT -->
+<section class="product" id="product">
+  <div class="product-inner">
     <div class="reveal">
-      <h2 class="contact-title">
-        <span data-i18n="contact.title1">Masz projekt?</span><br>
-        <em data-i18n="contact.title2">Porozmawiajmy.</em>
-      </h2>
+      <p class="product-eyebrow" data-i18n="sec.product">Wkrótce</p>
+      <h2 class="product-title"><span data-i18n="prod.t1">Gotowe szablony.</span><br><em data-i18n="prod.t2">Premium jakość.</em></h2>
+      <p class="product-desc" data-i18n="prod.desc">Pracujemy nad kolekcją gotowych szablonów stron i sklepów — zaprojektowanych z dbałością o konwersję. Kupujesz raz, wdrażasz w godzinę.</p>
+      <div class="product-tags">
+        <span class="product-tag" data-i18n="pt.s1">WordPress</span>
+        <span class="product-tag" data-i18n="pt.s2">Webflow</span>
+        <span class="product-tag" data-i18n="pt.s3">Wkrótce dostępne</span>
+      </div>
       <br><br>
-      <a href="mailto:michaldziedzic.work@gmail.com" class="contact-email">
-        michaldziedzic.work@gmail.com
+      <a href="#contact" class="product-cta">
+        <span data-i18n="prod.cta">Powiadom mnie o premierze</span>
+        <span>→</span>
       </a>
     </div>
-    <form class="reveal" style="transition-delay:0.1s" onsubmit="handleSubmit(event)">
+    <div class="product-visual reveal-left" style="transition-delay:.1s">
+      <div class="product-visual-inner">
+        <div class="product-visual-icon">T</div>
+        <div class="product-visual-label" data-i18n="prod.visual">Templates — coming soon</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div>
+      <p class="section-eyebrow reveal" data-i18n="sec.about">O nas</p>
+      <h2 class="about-title reveal" style="transition-delay:.06s"><span data-i18n="ab.t1">Dwóch braci.</span><br><em data-i18n="ab.t2">Jeden standard.</em></h2>
+      <p class="about-text reveal" style="transition-delay:.12s" data-i18n="ab.text">Od ponad dwóch lat projektujemy i budujemy strony internetowe, które naprawdę pracują dla swoich właścicieli. Nie robimy „stron na odwal" — każdy projekt traktujemy jak własny biznes. Jesteśmy z Gdyni, pracujemy globalnie.</p>
+      <div class="about-values reveal" style="transition-delay:.18s">
+        <div class="about-value"><span class="about-value-dot"></span><span class="about-value-text" data-i18n="av1">Projekt UI/UX w każdej wycenie</span></div>
+        <div class="about-value"><span class="about-value-dot"></span><span class="about-value-text" data-i18n="av2">Komunikacja bez żargonu</span></div>
+        <div class="about-value"><span class="about-value-dot"></span><span class="about-value-text" data-i18n="av3">Terminy dotrzymywane</span></div>
+        <div class="about-value"><span class="about-value-dot"></span><span class="about-value-text" data-i18n="av4">Wsparcie po wdrożeniu</span></div>
+      </div>
+    </div>
+    <div class="about-right reveal-left" style="transition-delay:.1s">
+      <div class="about-photo-placeholder">
+        <span class="about-photo-label" data-i18n="ab.photo">Twoje zdjęcie tutaj</span>
+      </div>
+      <a href="#contact" class="about-cta" data-i18n="ab.cta">Porozmawiajmy o projekcie →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="reveal">
+      <p class="section-eyebrow" data-i18n="sec.contact">Kontakt</p>
+      <h2 class="contact-title"><em data-i18n="ct.t1">Zacznijmy</em><br><span data-i18n="ct.t2">razem.</span></h2>
+      <p class="contact-desc" data-i18n="ct.desc">Masz projekt? Napisz do nas. Odpowiadamy w ciągu 24 godzin i — jeśli projekt pasuje — ustalamy termin rozmowy jeszcze tego samego dnia.</p>
+      <div class="contact-links">
+        <div class="contact-link">
+          <span class="contact-link-label" data-i18n="ct.email">Email</span>
+          <a href="mailto:michaldziedzic.work@gmail.com" class="contact-link-val" style="text-decoration:none;color:var(--ink);transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--ink)'">michaldziedzic.work@gmail.com</a>
+        </div>
+        <div class="contact-link">
+          <span class="contact-link-label" data-i18n="ct.loc">Lokalizacja</span>
+          <span class="contact-link-val" data-i18n="ct.locval">Gdynia, Polska</span>
+        </div>
+        <div class="contact-link">
+          <span class="contact-link-label" data-i18n="ct.avail">Dostępność</span>
+          <span class="contact-link-val" data-i18n="ct.availval">Otwarte na nowe projekty ✓</span>
+        </div>
+      </div>
+    </div>
+    <form class="reveal" style="transition-delay:.1s" onsubmit="handleSubmit(event)">
       <div class="form-row">
         <div class="field">
-          <label data-i18n="form.name">Imię i nazwisko</label>
+          <label data-i18n="f.name">Imię i nazwisko</label>
           <input type="text" required placeholder="Jan Kowalski">
         </div>
         <div class="field">
-          <label data-i18n="form.email">Email</label>
+          <label data-i18n="f.email">Email</label>
           <input type="email" required placeholder="jan@firma.pl">
         </div>
       </div>
-      <div class="field">
-        <label data-i18n="form.subject">Temat</label>
-        <input type="text" placeholder="Nowa strona dla mojej firmy">
+      <div class="form-row" style="border-bottom:1px solid var(--border)">
+        <div class="field full" style="border-bottom:none">
+          <label data-i18n="f.service">Czego potrzebujesz?</label>
+          <input type="text" placeholder="Strona firmowa, sklep, redesign...">
+        </div>
       </div>
-      <div class="field">
-        <label data-i18n="form.message">Wiadomość</label>
-        <textarea placeholder="Opisz swój projekt..."></textarea>
+      <div class="form-row" style="border-bottom:1px solid var(--border)">
+        <div class="field full" style="border-bottom:none">
+          <label data-i18n="f.message">Opowiedz o projekcie</label>
+          <textarea placeholder="Opisz swój projekt, budżet, terminy..."></textarea>
+        </div>
       </div>
-      <button type="submit" class="submit-btn" data-i18n="form.send">Wyślij wiadomość</button>
+      <button type="submit" class="form-submit">
+        <span class="form-submit-text" data-i18n="f.send">Wyślij wiadomość</span>
+        <span class="form-submit-arrow">↗</span>
+      </button>
     </form>
   </div>
 </section>
 
 <footer>
-  <a href="#" class="footer-logo">Lod<span>Works</span></a>
-  <p class="footer-copy" data-i18n="footer.copy">© 2025 LodWorks. Wszelkie prawa zastrzeżone.</p>
+  <a href="#" class="footer-logo">Lod<em>Works</em></a>
+  <p class="footer-copy" data-i18n="ft.copy">© 2025 LodWorks Studio</p>
+  <div class="footer-right">
+    <a href="#projects" data-i18n="ft.work">Realizacje</a>
+    <a href="#services" data-i18n="ft.serv">Usługi</a>
+    <a href="#contact" data-i18n="ft.contact">Kontakt</a>
+  </div>
 </footer>
 
 <script>
-const i18n = {
-  pl: {
-    'nav.projects': 'Projekty',
-    'nav.about': 'O nas',
-    'nav.stack': 'Stack',
-    'nav.contact': 'Kontakt',
-    'hero.eyebrow': 'Web Design & Development Studio',
-    'hero.title1': 'Strony, które',
-    'hero.title2': 'naprawdę działają.',
-    'hero.desc': 'Tworzymy nowoczesne strony internetowe, sklepy e-commerce i produkty cyfrowe. Łączymy estetykę z funkcjonalnością.',
-    'hero.cta': 'Zobacz projekty',
-    'projects.label': 'Wybrane projekty',
-    'p.lektoria': 'Platforma do korepetycji matematycznych — kompletna strona z polityką prywatności i regulaminem, zaprojektowana z myślą o uczniach i rodzicach.',
-    'p.hexasphere': 'Strona firmowa z nowoczesnym designem — zaprojektowana z dbałością o identyfikację wizualną i doświadczenie użytkownika.',
-    'p.szkoly': 'Strona edukacyjna dla instytucji szkoleniowej — przejrzysta struktura, pełna informacji dla kandydatów i rodziców.',
-    'p.piekna': 'Projekt z misją — strona łącząca estetykę z przekazem. Współpraca z marką lifestyle i well-being.',
-    'p.truetoweb': 'Poprzednia marka studia — strona prezentująca usługi web designu i realizacje dla klientów z różnych branż.',
-    'about.label': 'O nas',
-    'about.title1': 'Dwóch braci.',
-    'about.title2': 'Jeden cel.',
-    'about.stat1': 'lata doświadczenia',
-    'about.stat2': 'zrealizowanych projektów',
-    'about.stat3': 'technologie CMS',
-    'about.stat4': 'podejście do jakości',
-    'about.text': 'Od ponad dwóch lat projektujemy i tworzymy strony internetowe — od kompletnych stron firmowych po współpracę ze specjalistami od brandingu i identyfikacji wizualnej. Tworzymy nowoczesne strony, które łączą estetykę z funkcjonalnością i są w pełni dopasowane do potrzeb klientów oraz ich biznesów.',
-    'stack.label': 'Technologie',
-    'contact.label': 'Kontakt',
-    'contact.title1': 'Masz projekt?',
-    'contact.title2': 'Porozmawiajmy.',
-    'form.name': 'Imię i nazwisko',
-    'form.email': 'Email',
-    'form.subject': 'Temat',
-    'form.message': 'Wiadomość',
-    'form.send': 'Wyślij wiadomość',
-    'footer.copy': '© 2025 LodWorks. Wszelkie prawa zastrzeżone.',
-  },
-  en: {
-    'nav.projects': 'Projects',
-    'nav.about': 'About',
-    'nav.stack': 'Stack',
-    'nav.contact': 'Contact',
-    'hero.eyebrow': 'Web Design & Development Studio',
-    'hero.title1': 'Websites that',
-    'hero.title2': 'actually work.',
-    'hero.desc': 'We build modern websites, e-commerce stores and digital products. We combine aesthetics with functionality.',
-    'hero.cta': 'View projects',
-    'projects.label': 'Selected projects',
-    'p.lektoria': 'Math tutoring platform — a complete website with privacy policy and terms of service, designed for students and parents.',
-    'p.hexasphere': 'Corporate website with modern design — crafted with attention to visual identity and user experience.',
-    'p.szkoly': 'Educational website for a training institution — clear structure, full of information for applicants and parents.',
-    'p.piekna': 'A purpose-driven project — a website combining aesthetics with message. Collaboration with a lifestyle & well-being brand.',
-    'p.truetoweb': 'Our previous studio brand — a website presenting web design services and work for clients across various industries.',
-    'about.label': 'About us',
-    'about.title1': 'Two brothers.',
-    'about.title2': 'One goal.',
-    'about.stat1': 'years of experience',
-    'about.stat2': 'completed projects',
-    'about.stat3': 'CMS technologies',
-    'about.stat4': 'approach to quality',
-    'about.text': 'For over two years we have been designing and building websites — from complete corporate sites to collaborations with branding and visual identity specialists. We create modern websites that combine aesthetics with functionality and are fully tailored to the needs of our clients and their businesses.',
-    'stack.label': 'Technologies',
-    'contact.label': 'Contact',
-    'contact.title1': 'Got a project?',
-    'contact.title2': "Let's talk.",
-    'form.name': 'Full name',
-    'form.email': 'Email',
-    'form.subject': 'Subject',
-    'form.message': 'Message',
-    'form.send': 'Send message',
-    'footer.copy': '© 2025 LodWorks. All rights reserved.',
-  }
-};
-
-let currentLang = 'pl';
-
-function setLang(lang) {
-  currentLang = lang;
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (i18n[lang][key]) el.textContent = i18n[lang][key];
-  });
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
-  });
-  document.documentElement.lang = lang;
-}
-
-window.addEventListener('scroll', () => {
-  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+// CURSOR
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='20px';cur.style.height='20px';ring.style.width='56px';ring.style.height='56px';ring.style.opacity='0.3';});
+  el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';ring.style.width='36px';ring.style.height='36px';ring.style.opacity='0.5';});
 });
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
+// NAV
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>20);});
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+// REVEAL
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.08});
+document.querySelectorAll('.reveal,.reveal-left').forEach(el=>obs.observe(el));
 
-function handleSubmit(e) {
+// FORM
+function handleSubmit(e){
   e.preventDefault();
-  const btn = e.target.querySelector('.submit-btn');
-  btn.textContent = currentLang === 'pl' ? 'Wysłano ✓' : 'Sent ✓';
-  btn.style.background = '#2A7A4A';
-  setTimeout(() => {
-    btn.textContent = i18n[currentLang]['form.send'];
-    btn.style.background = '';
-    e.target.reset();
-  }, 3000);
+  const btn=e.target.querySelector('.form-submit-text');
+  const arrow=e.target.querySelector('.form-submit-arrow');
+  const orig=btn.textContent;
+  btn.textContent=lang==='pl'?'Wysłano ✓':'Sent ✓';
+  arrow.style.background='#2d7a4a';
+  setTimeout(()=>{btn.textContent=orig;arrow.style.background='';e.target.reset();},3000);
+}
+
+// I18N
+const T={
+pl:{'nav.work':'Realizacje','nav.services':'Usługi','nav.about':'O nas','nav.contact':'Kontakt','nav.cta':'Wycena',
+'hero.badge':'Otwarte na nowe projekty','hero.t1':'Strony, które','hero.t2':'zamieniają','hero.t3':'odwiedziny w klientów.',
+'hero.desc':'Projektujemy i budujemy premium strony internetowe oraz sklepy dla małych i średnich firm. Bez szablonów. Z precyzją.',
+'hero.cta1':'Rozpocznij projekt','hero.cta2':'Zobacz realizacje','hero.scroll':'Przewiń',
+'stat.exp':'Lata doświadczenia','stat.proj':'Zrealizowanych projektów','stat.tech':'Platformy CMS','stat.custom':'Customowe projekty',
+'mq.s1':'Strony internetowe','mq.s2':'Sklepy e-commerce','mq.s3':'Produkty cyfrowe','mq.s4':'WordPress','mq.s5':'Webflow','mq.s6':'WooCommerce','mq.s7':'React','mq.s8':'UI/UX Design',
+'sec.projects':'Wybrane realizacje','proj.t1':'Projekty, które','proj.t2':'działają.','proj.link':'Porozmawiaj o projekcie',
+'p.lektoria':'Platforma korepetycji matematycznych — konwersja odwiedzających w uczniów.',
+'p.hexasphere':'Strona firmowa z pełną identyfikacją wizualną i premium designem.',
+'p.szkoly':'Portal edukacyjny zwiększający liczbę zapisów na kursy szkoleniowe.',
+'p.piekna':'Strona lifestyle z misją — estetyka wspierająca przekaz marki.',
+'p.truetoweb':'Poprzednia marka studia — strona agencji webowej dla klientów B2B.',
+'sec.services':'Co robimy','serv.t1':'Usługi, które','serv.t2':'przynoszą efekty.',
+'s1.title':'Strony internetowe','s1.desc':'Projekt i wdrożenie strony, która buduje zaufanie i prowadzi użytkownika do działania — od pierwszego kliknięcia do kontaktu.','s1.o1':'Projekt UI/UX na miarę','s1.o2':'WordPress / Webflow','s1.o3':'Szybkość i SEO w standardzie','s1.o4':'Pełna responsywność','s1.price':'2 000 zł',
+'s2.title':'Sklepy e-commerce','s2.desc':'Sklep zoptymalizowany pod sprzedaż — prosty w obsłudze dla klienta, łatwy do zarządzania dla Ciebie. Gotowy na rynek globalny.','s2.o1':'WooCommerce','s2.o2':'Integracja płatności','s2.o3':'Zarządzanie produktami','s2.o4':'Sprzedaż w wielu językach','s2.price':'4 000 zł',
+'s3.title':'Produkty cyfrowe','s3.desc':'Szablony, narzędzia i aplikacje webowe — gotowe rozwiązania, które można sprzedawać lub udostępniać klientom jako wartość dodaną.','s3.o1':'Szablony stron','s3.o2':'Narzędzia React / JS','s3.o3':'Dokumentacja i wsparcie','s3.o4':'Licencja komercyjna','s3.price':'500 zł',
+'s.from':'Od',
+'sec.process':'Jak pracujemy','proc.t1':'Sprawdzony','proc.t2':'proces.',
+'ps1.title':'Rozmowa i brief','ps1.desc':'Zaczynamy od zrozumienia Twojego biznesu, klientów i celów. Żadnych szablonowych pytań — tylko to, co ważne.',
+'ps2.title':'Projekt graficzny','ps2.desc':'Przed napisaniem linii kodu widzisz gotowy projekt. Możesz ocenić i zgłosić uwagi zanim cokolwiek zostanie zbudowane.',
+'ps3.title':'Budowa i wdrożenie','ps3.desc':'Piszemy czysty, szybki kod. Testujemy na wszystkich urządzeniach. Wdrażamy i przekazujemy Ci stronę gotową do działania.',
+'ps4.title':'Wsparcie po starcie','ps4.desc':'Szkolimy z obsługi i pozostajemy do dyspozycji. Strona żyje razem z Twoim biznesem.',
+'pq.t1':'Nie sprzedajemy stron.','pq.t2':'Sprzedajemy wyniki.',
+'pm1.t':'Szybka realizacja','pm1.d':'Prosta strona: 7–14 dni. Sklep lub aplikacja: 3–6 tygodni. Bez przeciągania.',
+'pm2.t':'Stały kontakt','pm2.d':'Jesteś na bieżąco przez cały czas. Żadnego milczenia przez 2 tygodnie.',
+'pm3.t':'Gwarancja jakości','pm3.d':'30 dni poprawek po wdrożeniu w cenie. Twoja satysfakcja to nasz priorytet.',
+'sec.test':'Opinie klientów','test.t1':'Co mówią','test.t2':'klienci.',
+'t1.text':'"Strona dostarczona w 10 dni, dokładnie taka jak prosiłem. Pierwsze zapytanie o współpracę przyszło przez formularz już w pierwszym tygodniu."','t1.role':'Właściciel firmy budowlanej',
+'t2.text':'"Wiedziałam co chcę, ale nie umiałam tego opisać. Chłopaki zapytali właściwe pytania i stworzyli coś, co przekroczyło moje oczekiwania."','t2.role':'Stylistka, marka osobista',
+'t3.text':'"Sklep działa, płatności działają, Google mnie znalazło. To wszystko czego potrzebowałem. Polecam bez zastrzeżeń."','t3.role':'E-commerce, branża sportowa',
+'sec.product':'Wkrótce','prod.t1':'Gotowe szablony.','prod.t2':'Premium jakość.',
+'prod.desc':'Pracujemy nad kolekcją gotowych szablonów stron i sklepów — zaprojektowanych z dbałością o konwersję. Kupujesz raz, wdrażasz w godzinę.',
+'pt.s1':'WordPress','pt.s2':'Webflow','pt.s3':'Wkrótce dostępne','prod.cta':'Powiadom mnie o premierze','prod.visual':'Templates — coming soon',
+'sec.about':'O nas','ab.t1':'Dwóch braci.','ab.t2':'Jeden standard.',
+'ab.text':'Od ponad dwóch lat projektujemy i budujemy strony internetowe, które naprawdę pracują dla swoich właścicieli. Nie robimy „stron na odwal" — każdy projekt traktujemy jak własny biznes. Jesteśmy z Gdyni, pracujemy globalnie.',
+'av1':'Projekt UI/UX w każdej wycenie','av2':'Komunikacja bez żargonu','av3':'Terminy dotrzymywane','av4':'Wsparcie po wdrożeniu',
+'ab.photo':'Twoje zdjęcie tutaj','ab.cta':'Porozmawiajmy o projekcie →',
+'sec.contact':'Kontakt','ct.t1':'Zacznijmy','ct.t2':'razem.',
+'ct.desc':'Masz projekt? Napisz do nas. Odpowiadamy w ciągu 24 godzin i — jeśli projekt pasuje — ustalamy termin rozmowy jeszcze tego samego dnia.',
+'ct.email':'Email','ct.loc':'Lokalizacja','ct.locval':'Gdynia, Polska','ct.avail':'Dostępność','ct.availval':'Otwarte na nowe projekty ✓',
+'f.name':'Imię i nazwisko','f.email':'Email','f.service':'Czego potrzebujesz?','f.message':'Opowiedz o projekcie','f.send':'Wyślij wiadomość',
+'ft.copy':'© 2025 LodWorks Studio','ft.work':'Realizacje','ft.serv':'Usługi','ft.contact':'Kontakt'},
+
+en:{'nav.work':'Work','nav.services':'Services','nav.about':'About','nav.contact':'Contact','nav.cta':'Get a quote',
+'hero.badge':'Available for new projects','hero.t1':'Websites that','hero.t2':'turn','hero.t3':'visitors into clients.',
+'hero.desc':'We design and build premium websites and e-commerce stores for small and medium businesses. No templates. Just precision.',
+'hero.cta1':'Start a project','hero.cta2':'View our work','hero.scroll':'Scroll',
+'stat.exp':'Years experience','stat.proj':'Completed projects','stat.tech':'CMS platforms','stat.custom':'Custom projects',
+'mq.s1':'Websites','mq.s2':'E-commerce','mq.s3':'Digital products','mq.s4':'WordPress','mq.s5':'Webflow','mq.s6':'WooCommerce','mq.s7':'React','mq.s8':'UI/UX Design',
+'sec.projects':'Selected work','proj.t1':'Projects that','proj.t2':'deliver.','proj.link':'Talk about your project',
+'p.lektoria':'Math tutoring platform — converting visitors into paying students.',
+'p.hexasphere':'Corporate website with full visual identity and premium design.',
+'p.szkoly':'Educational portal increasing course enrolment rates.',
+'p.piekna':'Lifestyle website — aesthetics aligned with brand purpose.',
+'p.truetoweb':'Previous studio brand — web agency site for B2B clients.',
+'sec.services':'What we do','serv.t1':'Services that','serv.t2':'drive results.',
+'s1.title':'Websites','s1.desc':'Design and development of a website that builds trust and guides users to act — from first click to contact form.','s1.o1':'Custom UI/UX design','s1.o2':'WordPress / Webflow','s1.o3':'Speed & SEO included','s1.o4':'Fully responsive','s1.price':'From €500',
+'s2.title':'E-commerce stores','s2.desc':'A store optimised for sales — simple for customers, easy to manage for you. Ready for global markets.','s2.o1':'WooCommerce','s2.o2':'Payment integration','s2.o3':'Product management','s2.o4':'Multi-language sales','s2.price':'From €1 000',
+'s3.title':'Digital products','s3.desc':'Templates, web tools and applications — ready-made digital products to sell or offer to clients as added value.','s3.o1':'Website templates','s3.o2':'React / JS tools','s3.o3':'Documentation & support','s3.o4':'Commercial licence','s3.price':'From €120',
+'s.from':'From',
+'sec.process':'How we work','proc.t1':'A proven','proc.t2':'process.',
+'ps1.title':'Brief & discovery','ps1.desc':'We start by understanding your business, customers, and goals. No generic questions — only what matters.',
+'ps2.title':'Visual design','ps2.desc':'Before a single line of code, you see the finished design. Review and give feedback before anything is built.',
+'ps3.title':'Build & launch','ps3.desc':'We write clean, fast code. We test on all devices. We deploy and hand over a site that\'s ready to work.',
+'ps4.title':'Post-launch support','ps4.desc':'We train you and stay available. Your site grows with your business.',
+'pq.t1':"We don't sell websites.",'pq.t2':'We sell results.',
+'pm1.t':'Fast delivery','pm1.d':'Simple site: 7–14 days. Store or app: 3–6 weeks. No dragging.',
+'pm2.t':'Constant communication','pm2.d':'You\'re updated throughout. No two weeks of silence.',
+'pm3.t':'Quality guarantee','pm3.d':'30 days of revisions after launch, included. Your satisfaction is our priority.',
+'sec.test':'Client reviews','test.t1':'What clients','test.t2':'say.',
+'t1.text':'"Site delivered in 10 days, exactly as requested. First enquiry came through the contact form within the first week."','t1.role':'Construction business owner',
+'t2.text':'"I knew what I wanted but couldn\'t describe it. The guys asked the right questions and built something beyond my expectations."','t2.role':'Stylist, personal brand',
+'t3.text':'"The shop works, payments work, Google found me. That\'s everything I needed. I recommend without reservation."','t3.role':'E-commerce, sports industry',
+'sec.product':'Coming soon','prod.t1':'Ready templates.','prod.t2':'Premium quality.',
+'prod.desc':'We\'re building a collection of ready-to-use site and store templates — designed with conversion in mind. Buy once, deploy in an hour.',
+'pt.s1':'WordPress','pt.s2':'Webflow','pt.s3':'Coming soon','prod.cta':'Notify me at launch','prod.visual':'Templates — coming soon',
+'sec.about':'About us','ab.t1':'Two brothers.','ab.t2':'One standard.',
+'ab.text':'For over two years we\'ve been designing and building websites that actually work for their owners. We don\'t do "good enough" — every project gets the same attention we\'d give our own business. Based in Gdynia, working globally.',
+'av1':'UI/UX design in every quote','av2':'Communication without jargon','av3':'Deadlines kept','av4':'Post-launch support',
+'ab.photo':'Your photo here','ab.cta':'Let\'s talk about your project →',
+'sec.contact':'Contact','ct.t1':'Let\'s start','ct.t2':'together.',
+'ct.desc':'Have a project? Write to us. We reply within 24 hours and — if the project fits — we schedule a call the same day.',
+'ct.email':'Email','ct.loc':'Location','ct.locval':'Gdynia, Poland','ct.avail':'Availability','ct.availval':'Open for new projects ✓',
+'f.name':'Full name','f.email':'Email','f.service':'What do you need?','f.message':'Tell us about your project','f.send':'Send message',
+'ft.copy':'© 2025 LodWorks Studio','ft.work':'Work','ft.serv':'Services','ft.contact':'Contact'}
+};
+
+let lang='pl';
+function setLang(l){
+  lang=l;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const v=T[l][el.getAttribute('data-i18n')];
+    if(v)el.textContent=v;
+  });
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.textContent===l.toUpperCase()));
+  document.documentElement.lang=l;
 }
 </script>
 </body>
