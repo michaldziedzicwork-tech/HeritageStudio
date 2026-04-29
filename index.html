@@ -33,6 +33,15 @@ body{font-family:var(--ui);background:var(--bg);color:var(--ink);overflow-x:hidd
 #cursor-ring{position:fixed;width:36px;height:36px;border:1px solid var(--accent);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform 0.08s ease,width 0.3s ease,height 0.3s ease,opacity 0.3s ease;opacity:0.5;}
 body:hover #cursor{opacity:1;}
 
+/* Additional styles */
+.btn-primary .arrow,
+.project-row-arrow,
+.form-submit-arrow {
+  font-family: var(--ui);
+  font-style: normal;
+}
+
+
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 56px;height:68px;display:flex;align-items:center;justify-content:space-between;transition:background 0.4s,border-color 0.4s;border-bottom:1px solid transparent;}
 nav.scrolled{background:rgba(250,250,248,0.95);backdrop-filter:blur(12px);border-color:var(--border);}
