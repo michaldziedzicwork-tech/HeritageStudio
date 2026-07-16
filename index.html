@@ -18,7 +18,7 @@
   --bg:#FAFAF8;
   --ink:#0E0E0C;
   --ink2:#5A5954;
-  --ink3:#A8A49E;
+  --ink3:#706C64;
   --accent:#D4522A;
   --accent2:#1A1A18;
   --white:#FFFFFF;
@@ -32,7 +32,7 @@
   --bg:#0E0E0C;
   --ink:#F0EDE6;
   --ink2:#A8A49E;
-  --ink3:#5A5954;
+  --ink3:#928F87;
   --border:#2A2A28;
   --surface:#1A1A18;
   --white:#0E0E0C;
@@ -157,9 +157,9 @@ nav.scrolled{background:rgba(250,250,248,0.95);backdrop-filter:blur(12px);border
 .project-row-info{}
 .project-row-name{font-family:var(--display);font-size:28px;font-weight:700;letter-spacing:-0.01em;color:var(--ink);margin-bottom:4px;transition:color 0.2s;}
 .project-row:hover .project-row-name{color:var(--accent);}
-.project-row-desc{font-size:16px;color:var(--ink2);font-family:var(--body);}
+.project-row-desc{font-size:17px;color:var(--ink2);font-family:var(--body);}
 .project-row-tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;}
-.project-tag{font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);border:1px solid var(--border);padding:4px 10px;border-radius:2px;}
+.project-tag{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);border:1px solid var(--border);padding:5px 12px;border-radius:2px;}
 .project-row-arrow{font-size:20px;color:var(--ink3);text-align:right;transition:color 0.2s,transform 0.2s;}
 .project-row:hover .project-row-arrow{color:var(--accent);transform:translate(4px,-4px);}
 
@@ -177,12 +177,12 @@ nav.scrolled{background:rgba(250,250,248,0.95);backdrop-filter:blur(12px);border
 .service-icon{width:44px;height:44px;border:1px solid rgba(255,255,255,0.1);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-bottom:32px;}
 .service-icon svg{width:20px;height:20px;stroke:rgba(255,255,255,0.45);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
 .service-title{font-family:var(--display);font-size:24px;font-weight:700;color:#fff;margin-bottom:14px;letter-spacing:-0.01em;}
-.service-desc{font-size:16px;line-height:1.75;color:rgba(255,255,255,0.45);font-family:var(--body);margin-bottom:28px;}
+.service-desc{font-size:17px;line-height:1.75;color:rgba(255,255,255,0.72);font-family:var(--body);margin-bottom:28px;}
 .service-outcomes{list-style:none;display:flex;flex-direction:column;gap:8px;}
-.service-outcomes li{font-size:12px;font-weight:500;letter-spacing:0.04em;color:rgba(255,255,255,0.35);display:flex;align-items:center;gap:8px;}
+.service-outcomes li{font-size:13px;font-weight:500;letter-spacing:0.04em;color:rgba(255,255,255,0.6);display:flex;align-items:center;gap:8px;}
 .service-outcomes li::before{content:'';display:block;width:4px;height:4px;background:var(--accent);border-radius:50%;flex-shrink:0;}
 .service-price{margin-top:32px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.06);}
-.service-price-label{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:4px;}
+.service-price-label{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:4px;}
 .service-price-val{font-family:var(--display);font-size:20px;font-weight:700;color:#fff;}
 
 /* PROCESS */
@@ -563,7 +563,7 @@ footer{padding:24px 56px;border-top:1px solid var(--border);display:flex;align-i
       <span class="project-row-num">01</span>
       <div class="project-row-info">
         <div class="project-row-name">Lektoria</div>
-        <div class="project-row-desc" data-i18n="p.lektoria">Platforma korepetycji matematycznych — konwersja odwiedzających w uczniów.</div>
+        <div class="project-row-desc" data-i18n="p.lektoria">Platforma korepetycji matematycznych — zapisy uczniów online.</div>
       </div>
       <div class="project-row-tags">
         <span class="project-tag">Webflow</span>
@@ -575,7 +575,7 @@ footer{padding:24px 56px;border-top:1px solid var(--border);display:flex;align-i
       <span class="project-row-num">02</span>
       <div class="project-row-info">
         <div class="project-row-name">Hexasphere</div>
-        <div class="project-row-desc" data-i18n="p.hexasphere">Sklep internetowy z pełną identyfikacją wizualną i premium designem.</div>
+        <div class="project-row-desc" data-i18n="p.hexasphere">Sklep online z pełnym brandingiem marki.</div>
       </div>
       <div class="project-row-tags">
         <span class="project-tag">WordPress</span>
@@ -587,7 +587,7 @@ footer{padding:24px 56px;border-top:1px solid var(--border);display:flex;align-i
       <span class="project-row-num">03</span>
       <div class="project-row-info">
         <div class="project-row-name">Szkoły Rzemiosł</div>
-        <div class="project-row-desc" data-i18n="p.szkoly">Nowoczesna strona publicznego technikum i szkoły branżowej.</div>
+        <div class="project-row-desc" data-i18n="p.szkoly">Strona publicznego technikum i szkoły branżowej.</div>
       </div>
       <div class="project-row-tags">
         <span class="project-tag">WordPress</span>
@@ -599,7 +599,7 @@ footer{padding:24px 56px;border-top:1px solid var(--border);display:flex;align-i
       <span class="project-row-num">04</span>
       <div class="project-row-info">
         <div class="project-row-name">Jesteś Piękna</div>
-        <div class="project-row-desc" data-i18n="p.piekna">Strona lifestyle z misją — estetyka wspierająca przekaz marki.</div>
+        <div class="project-row-desc" data-i18n="p.piekna">Strona lifestyle z misją, wspierająca markę osobistą.</div>
       </div>
       <div class="project-row-tags">
         <span class="project-tag">WordPress</span>
@@ -611,7 +611,7 @@ footer{padding:24px 56px;border-top:1px solid var(--border);display:flex;align-i
       <span class="project-row-num">05</span>
       <div class="project-row-info">
         <div class="project-row-name">TrueToWeb</div>
-        <div class="project-row-desc" data-i18n="p.truetoweb">Poprzednia marka studia — strona agencji webowej dla klientów B2B.</div>
+        <div class="project-row-desc" data-i18n="p.truetoweb">Poprzednia marka — strona agencji dla klientów B2B.</div>
       </div>
       <div class="project-row-tags">
         <span class="project-tag">WordPress</span>
@@ -631,7 +631,7 @@ footer{padding:24px 56px;border-top:1px solid var(--border);display:flex;align-i
     <div class="service-card reveal" data-num="01">
       <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
       <h3 class="service-title" data-i18n="s1.title">Strony internetowe</h3>
-      <p class="service-desc" data-i18n="s1.desc">Projekt i wdrożenie strony, która buduje zaufanie i prowadzi użytkownika do działania — od pierwszego kliknięcia do kontaktu.</p>
+      <p class="service-desc" data-i18n="s1.desc">Strona, która buduje zaufanie i prowadzi do kontaktu.</p>
       <ul class="service-outcomes">
         <li data-i18n="s1.o1">Projekt UI/UX na miarę</li>
         <li data-i18n="s1.o2">WordPress / Webflow</li>
@@ -647,7 +647,7 @@ footer{padding:24px 56px;border-top:1px solid var(--border);display:flex;align-i
     <div class="service-card reveal" style="transition-delay:.08s" data-num="02">
       <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 01-8 0"/></svg></div>
       <h3 class="service-title" data-i18n="s2.title">Sklepy e-commerce</h3>
-      <p class="service-desc" data-i18n="s2.desc">Sklep zoptymalizowany pod sprzedaż — prosty w obsłudze dla klienta, łatwy do zarządzania dla Ciebie. Gotowy na rynek globalny.</p>
+      <p class="service-desc" data-i18n="s2.desc">Sklep zoptymalizowany pod sprzedaż. Prosty w obsłudze, łatwy w zarządzaniu.</p>
       <ul class="service-outcomes">
         <li data-i18n="s2.o1">WooCommerce</li>
         <li data-i18n="s2.o2">Integracja płatności</li>
@@ -662,7 +662,7 @@ footer{padding:24px 56px;border-top:1px solid var(--border);display:flex;align-i
     <div class="service-card reveal" style="transition-delay:.16s" data-num="03">
       <div class="service-icon"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
       <h3 class="service-title" data-i18n="s3.title">Produkty cyfrowe</h3>
-      <p class="service-desc" data-i18n="s3.desc">Szablony, narzędzia i aplikacje webowe — gotowe rozwiązania, które można sprzedawać lub udostępniać klientom jako wartość dodaną.</p>
+      <p class="service-desc" data-i18n="s3.desc">Szablony i narzędzia webowe. Gotowe do sprzedaży lub wdrożenia u klienta.</p>
       <ul class="service-outcomes">
         <li data-i18n="s3.o1">Szablony stron</li>
         <li data-i18n="s3.o2">Narzędzia React / JS</li>
@@ -897,15 +897,15 @@ pl:{'nav.work':'Realizacje','nav.services':'Usługi','nav.about':'O nas','nav.co
 'stat.exp':'Lata doświadczenia','stat.proj':'Zrealizowanych projektów','stat.tech':'Platformy CMS','stat.custom':'Customowe projekty',
 'mq.s1':'Strony internetowe','mq.s2':'Sklepy e-commerce','mq.s3':'Produkty cyfrowe','mq.s4':'WordPress','mq.s5':'Webflow','mq.s6':'WooCommerce','mq.s7':'React','mq.s8':'UI/UX Design',
 'sec.projects':'Wybrane realizacje','proj.t1':'Projekty, które','proj.t2':'działają.','proj.link':'Porozmawiaj o projekcie',
-'p.lektoria':'Platforma korepetycji matematycznych — konwersja odwiedzających w uczniów.',
-'p.hexasphere':'Sklep internetowy z pełną identyfikacją wizualną i premium designem.',
-'p.szkoly':'Nowoczesna strona publicznego technikum i szkoły branżowej.',
-'p.piekna':'Strona lifestyle z misją — estetyka wspierająca przekaz marki.',
-'p.truetoweb':'Poprzednia marka studia — strona agencji webowej dla klientów B2B.',
+'p.lektoria':'Platforma korepetycji matematycznych — zapisy uczniów online.',
+'p.hexasphere':'Sklep online z pełnym brandingiem marki.',
+'p.szkoly':'Strona publicznego technikum i szkoły branżowej.',
+'p.piekna':'Strona lifestyle z misją, wspierająca markę osobistą.',
+'p.truetoweb':'Poprzednia marka — strona agencji dla klientów B2B.',
 'sec.services':'Co robię','serv.t1':'Usługi, które','serv.t2':'przynoszą efekty.',
-'s1.title':'Strony internetowe','s1.desc':'Projekt i wdrożenie strony, która buduje zaufanie i prowadzi użytkownika do działania — od pierwszego kliknięcia do kontaktu.','s1.o1':'Projekt UI/UX na miarę','s1.o2':'WordPress / Webflow','s1.o3':'Szybkość i SEO w standardzie','s1.o4':'Pełna responsywność','s1.price':'1 500 zł',
-'s2.title':'Sklepy e-commerce','s2.desc':'Sklep zoptymalizowany pod sprzedaż — prosty w obsłudze dla klienta, łatwy do zarządzania dla Ciebie. Gotowy na rynek globalny.','s2.o1':'WooCommerce','s2.o2':'Integracja płatności','s2.o3':'Zarządzanie produktami','s2.o4':'Sprzedaż w wielu językach','s2.price':'4 000 zł',
-'s3.title':'Produkty cyfrowe','s3.desc':'Szablony, narzędzia i aplikacje webowe — gotowe rozwiązania, które można sprzedawać lub udostępniać klientom jako wartość dodaną.','s3.o1':'Szablony stron','s3.o2':'Narzędzia React / JS','s3.o3':'Dokumentacja i wsparcie','s3.o4':'Licencja komercyjna','s3.price':'500 zł',
+'s1.title':'Strony internetowe','s1.desc':'Strona, która buduje zaufanie i prowadzi do kontaktu.','s1.o1':'Projekt UI/UX na miarę','s1.o2':'WordPress / Webflow','s1.o3':'Szybkość i SEO w standardzie','s1.o4':'Pełna responsywność','s1.price':'1 500 zł',
+'s2.title':'Sklepy e-commerce','s2.desc':'Sklep zoptymalizowany pod sprzedaż. Prosty w obsłudze, łatwy w zarządzaniu.','s2.o1':'WooCommerce','s2.o2':'Integracja płatności','s2.o3':'Zarządzanie produktami','s2.o4':'Sprzedaż w wielu językach','s2.price':'4 000 zł',
+'s3.title':'Produkty cyfrowe','s3.desc':'Szablony i narzędzia webowe. Gotowe do sprzedaży lub wdrożenia u klienta.','s3.o1':'Szablony stron','s3.o2':'Narzędzia React / JS','s3.o3':'Dokumentacja i wsparcie','s3.o4':'Licencja komercyjna','s3.price':'500 zł',
 's.from':'Od',
 'sec.process':'Jak pracuję','proc.t1':'Sprawdzony','proc.t2':'proces.',
 'ps1.title':'Rozmowa i brief','ps1.desc':'Zaczynam od zrozumienia Twojego biznesu, klientów i celów. Żadnych szablonowych pytań — tylko to, co ważne.',
@@ -940,15 +940,15 @@ en:{'nav.work':'Work','nav.services':'Services','nav.about':'About','nav.contact
 'stat.exp':'Years experience','stat.proj':'Completed projects','stat.tech':'CMS platforms','stat.custom':'Custom projects',
 'mq.s1':'Websites','mq.s2':'E-commerce','mq.s3':'Digital products','mq.s4':'WordPress','mq.s5':'Webflow','mq.s6':'WooCommerce','mq.s7':'React','mq.s8':'UI/UX Design',
 'sec.projects':'Selected work','proj.t1':'Projects that','proj.t2':'deliver.','proj.link':'Talk about your project',
-'p.lektoria':'Math tutoring platform — converting visitors into paying students.',
-'p.hexasphere':'Online store with full visual identity and premium design.',
-'p.szkoly':'The modern side of a public technical school and vocational school.',
-'p.piekna':'Lifestyle website — aesthetics aligned with brand purpose.',
-'p.truetoweb':'Previous studio brand — web agency site for B2B clients.',
+'p.lektoria':'Math tutoring platform with online student sign-ups.',
+'p.hexasphere':'Online store with full brand identity.',
+'p.szkoly':'Website for a public technical and vocational school.',
+'p.piekna':'Mission-driven lifestyle website supporting a personal brand.',
+'p.truetoweb':'Previous studio brand — agency site for B2B clients.',
 'sec.services':'What I do','serv.t1':'Services that','serv.t2':'drive results.',
-'s1.title':'Websites','s1.desc':'Design and development of a website that builds trust and guides users to act — from first click to contact form.','s1.o1':'Custom UI/UX design','s1.o2':'WordPress / Webflow','s1.o3':'Speed & SEO included','s1.o4':'Fully responsive','s1.price':'From €350',
-'s2.title':'E-commerce stores','s2.desc':'A store optimised for sales — simple for customers, easy to manage for you. Ready for global markets.','s2.o1':'WooCommerce','s2.o2':'Payment integration','s2.o3':'Product management','s2.o4':'Multi-language sales','s2.price':'From €1 000',
-'s3.title':'Digital products','s3.desc':'Templates, web tools and applications — ready-made digital products to sell or offer to clients as added value.','s3.o1':'Website templates','s3.o2':'React / JS tools','s3.o3':'Documentation & support','s3.o4':'Commercial licence','s3.price':'From €120',
+'s1.title':'Websites','s1.desc':'A website that builds trust and drives contact.','s1.o1':'Custom UI/UX design','s1.o2':'WordPress / Webflow','s1.o3':'Speed & SEO included','s1.o4':'Fully responsive','s1.price':'From €350',
+'s2.title':'E-commerce stores','s2.desc':'A store optimised for sales. Simple to use, easy to manage.','s2.o1':'WooCommerce','s2.o2':'Payment integration','s2.o3':'Product management','s2.o4':'Multi-language sales','s2.price':'From €1 000',
+'s3.title':'Digital products','s3.desc':'Web templates and tools. Ready to sell or hand to clients.','s3.o1':'Website templates','s3.o2':'React / JS tools','s3.o3':'Documentation & support','s3.o4':'Commercial licence','s3.price':'From €120',
 's.from':'From',
 'sec.process':'How I work','proc.t1':'A proven','proc.t2':'process.',
 'ps1.title':'Brief & discovery','ps1.desc':'I start by understanding your business, customers, and goals. No generic questions — only what matters.',
