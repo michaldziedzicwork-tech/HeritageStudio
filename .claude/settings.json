@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(sort -t: -k1,1n)",
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "Bash(git rm *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
     ]
   }
 }
