@@ -200,7 +200,9 @@ html:not([data-theme="dark"]) .icon-sun{display:block;}
 .project-card.feature{grid-row:span 2;}
 .project-visual{aspect-ratio:16/11;position:relative;overflow:hidden;background:var(--mockup,linear-gradient(135deg,#e8ddc9,#d8c9a8));}
 .project-card.feature .project-visual{aspect-ratio:16/13;}
-.mockup-chrome{position:absolute;top:0;left:0;right:0;height:26px;background:rgba(255,255,255,.35);display:flex;align-items:center;gap:5px;padding:0 10px;}
+.project-visual img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .5s cubic-bezier(.16,1,.3,1);}
+.project-card:hover .project-visual img{transform:scale(1.035);}
+.mockup-chrome{position:absolute;top:0;left:0;right:0;height:26px;background:rgba(255,255,255,.35);display:flex;align-items:center;gap:5px;padding:0 10px;z-index:1;}
 .mockup-chrome span{width:6px;height:6px;border-radius:50%;background:rgba(27,25,18,.25);}
 .mockup-word{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:600;font-style:italic;font-size:clamp(22px,3vw,40px);color:rgba(27,25,18,.28);text-align:center;padding:30px;letter-spacing:-.02em;}
 .project-body{padding:22px 24px 26px;display:flex;flex-direction:column;gap:8px;flex:1;}
@@ -446,9 +448,9 @@ footer{padding-top:48px;padding-bottom:48px;border-top:1px solid var(--border);}
   </div>
   <div class="projects-grid">
     <a href="https://lektoria.webflow.io" target="_blank" rel="noopener" class="project-card feature reveal">
-      <div class="project-visual" style="--mockup:linear-gradient(135deg,#f4e3c8,#e0b98c);">
+      <div class="project-visual">
         <div class="mockup-chrome"><span></span><span></span><span></span></div>
-        <div class="mockup-word">Lektoria</div>
+        <img src="assets/projects/lektoria.webp" alt="Zrzut ekranu strony Lektoria" loading="lazy">
       </div>
       <div class="project-body">
         <span class="project-num">01</span>
@@ -459,9 +461,9 @@ footer{padding-top:48px;padding-bottom:48px;border-top:1px solid var(--border);}
     </a>
     <div class="projects-sub">
       <a href="https://hexasphere.pl" target="_blank" rel="noopener" class="project-card reveal" style="transition-delay:.05s">
-        <div class="project-visual" style="--mockup:linear-gradient(135deg,#e7e1d4,#c9bfa8);">
+        <div class="project-visual">
           <div class="mockup-chrome"><span></span><span></span><span></span></div>
-          <div class="mockup-word">Hexasphere</div>
+          <img src="assets/projects/hexasphere.webp" alt="Zrzut ekranu strony Hexasphere" loading="lazy">
         </div>
         <div class="project-body">
           <span class="project-num">02</span>
@@ -471,9 +473,9 @@ footer{padding-top:48px;padding-bottom:48px;border-top:1px solid var(--border);}
         </div>
       </a>
       <a href="https://szkolyrzemiosl.edu.pl" target="_blank" rel="noopener" class="project-card reveal" style="transition-delay:.1s">
-        <div class="project-visual" style="--mockup:linear-gradient(135deg,#e0e4de,#b9c4b1);">
+        <div class="project-visual">
           <div class="mockup-chrome"><span></span><span></span><span></span></div>
-          <div class="mockup-word">Szkoły Rzemiosł</div>
+          <img src="assets/projects/szkoly-rzemiosl.webp" alt="Zrzut ekranu strony Szkoły Rzemiosł" loading="lazy">
         </div>
         <div class="project-body">
           <span class="project-num">03</span>
@@ -483,9 +485,9 @@ footer{padding-top:48px;padding-bottom:48px;border-top:1px solid var(--border);}
         </div>
       </a>
       <a href="https://jestespiekna.mocniwduchu.pl" target="_blank" rel="noopener" class="project-card reveal" style="transition-delay:.15s">
-        <div class="project-visual" style="--mockup:linear-gradient(135deg,#f2ded8,#e0a9a3);">
+        <div class="project-visual">
           <div class="mockup-chrome"><span></span><span></span><span></span></div>
-          <div class="mockup-word">Jesteś Piękna</div>
+          <img src="assets/projects/jestespiekna.webp" alt="Zrzut ekranu strony Jesteś Piękna" loading="lazy">
         </div>
         <div class="project-body">
           <span class="project-num">04</span>
@@ -495,9 +497,9 @@ footer{padding-top:48px;padding-bottom:48px;border-top:1px solid var(--border);}
         </div>
       </a>
       <a href="https://truetoweb.com" target="_blank" rel="noopener" class="project-card reveal" style="transition-delay:.2s">
-        <div class="project-visual" style="--mockup:linear-gradient(135deg,#dbe0e6,#9fb0c2);">
+        <div class="project-visual">
           <div class="mockup-chrome"><span></span><span></span><span></span></div>
-          <div class="mockup-word">TrueToWeb</div>
+          <img src="assets/projects/truetoweb.webp" alt="Zrzut ekranu strony TrueToWeb" loading="lazy">
         </div>
         <div class="project-body">
           <span class="project-num">05</span>
