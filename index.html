@@ -187,7 +187,7 @@ html:not([data-theme="dark"]) .icon-sun{display:block;}
 .about-value-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;flex-shrink:0;}
 .about-value-text{font-size:13px;font-weight:600;color:var(--ink);}
 .about-photo{aspect-ratio:1;border-radius:16px;background:linear-gradient(150deg,var(--surface),var(--bg-alt));border:1px solid var(--border);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
-.about-photo::before{content:'MD';font-family:var(--display);font-size:120px;font-weight:600;font-style:italic;color:var(--border);}
+.about-photo img{width:100%;height:100%;object-fit:cover;display:block;}
 .about-cta{margin-top:32px;display:inline-block;}
 @media(max-width:860px){.about-inner{grid-template-columns:1fr;gap:44px;}.about-values{grid-template-columns:1fr;}.about-photo{max-width:280px;}}
 
@@ -429,7 +429,7 @@ footer{padding-top:48px;padding-bottom:48px;border-top:1px solid var(--border);}
 <!-- ABOUT -->
 <section class="about wrap" id="about">
   <div class="about-inner">
-    <div class="about-photo reveal-left"></div>
+    <div class="about-photo reveal-left"><img src="assets/michal-dziedzic.webp" alt="Michał Dziedzic" loading="lazy"></div>
     <div class="reveal" style="transition-delay:.1s">
       <p class="eyebrow"><span class="eyebrow-dot"></span><span data-i18n="sec.about">O mnie</span></p>
       <h2 class="about-title"><span data-i18n="ab.t1">Jeden człowiek,</span><br><em data-i18n="ab.t2">wiele możliwości.</em></h2>
